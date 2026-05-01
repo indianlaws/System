@@ -23,13 +23,40 @@ body{
   font-family:var(--font-sans,"Anthropic Sans",sans-serif);
   background:var(--color-background-primary);
   color:var(--color-text-primary);
+  overflow-x:hidden;
 }
-.wrap{padding:16px 0 32px}
+.wrap{
+  padding:16px 12px 32px;
+  max-width:1200px;
+  margin:auto;
+}
 
-h1{font-size:20px;font-weight:500;text-align:center;margin-bottom:4px;color:var(--color-text-primary)}
-.subtitle{font-size:12px;color:var(--color-text-secondary);text-align:center;margin-bottom:18px}
-.toc{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:20px;padding:0 8px}
-.toc-btn{font-size:11px;padding:4px 10px;border-radius:20px;border:1px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-secondary);cursor:pointer;transition:all .2s}
+h1{
+  font-size:clamp(18px, 4vw, 28px);
+  font-weight:500;
+  text-align:center;
+  margin-bottom:4px;c
+  olor:var(--color-text-primary)
+}
+.subtitle{
+  font-size:clamp(11px, 2.5vw, 14px);
+  color:var(--color-text-secondary);
+  text-align:center;
+  margin-bottom:18px
+}
+.toc{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:20px;padding:0 8px}
+.toc-btn{
+  flex:1 1 auto;
+  text-align:center;
+  font-size:11px;
+  padding:4px 10px;
+  border-radius:20px;
+  border:1px solid var(--color-border-secondary);
+  background:var(--color-background-secondary);
+  color:var(--color-text-secondary);
+  cursor:pointer;
+  transition:all .2s
+}
 .toc-btn:hover,.toc-btn.active{background:var(--color-text-primary);color:var(--color-background-primary)}
 .section{
   margin-bottom:20px;
@@ -41,7 +68,7 @@ h1{font-size:20px;font-weight:500;text-align:center;margin-bottom:4px;color:var(
 }
 .sec-header{
   color: #622b8b;
-  padding:10px 16px;
+  padding:14px;
   display:flex;
   align-items:center;
   gap:10px;
@@ -50,14 +77,24 @@ h1{font-size:20px;font-weight:500;text-align:center;margin-bottom:4px;color:var(
   position:relative;
   z-index:1;
 }
-.sec-label{font-size:13px;font-weight:500}
+.sec-label{font-size:clamp(12px, 2.5vw, 14px);font-weight:500}
 .sec-meta{font-size:11px;color:var(--color-text-tertiary);margin-left:auto}
 .sec-arrow{font-size:12px;color:var(--color-text-tertiary);transition:transform .2s}
 .sec-arrow.open{transform:rotate(90deg)}
 .sec-body{display:none;padding:0 12px 12px}
 .sec-body.open{display:block}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-top:10px}
-.card{background:#0d0d0d; border-radius:8px;padding:10px 12px;border:1px solid var(--color-border-tertiary)}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(160px, 1fr));
+  gap:10px;
+  margin-top:10px
+}
+  @media (max-width:600px){
+  .grid{
+    grid-template-columns:1fr;
+  }
+}
+.card{background:#0d0d0d; border-radius:8px;padding:12px;border:1px solid var(--color-border-tertiary)}
 .card-title{font-size:12px;font-weight:500;margin-bottom:4px}
 .card-body{font-size:11px;color:var(--color-text-secondary);line-height:1.6}
 .pill{display:inline-block;font-size:10px;padding:2px 7px;border-radius:10px;margin:2px 2px 0 0;font-weight:500}
@@ -71,7 +108,7 @@ h1{font-size:20px;font-weight:500;text-align:center;margin-bottom:4px;color:var(
 .legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;justify-content:center;padding:0 8px}
 .legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--color-text-secondary)}
 .dot{width:10px;height:10px;border-radius:50%}
-.overview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:20px;padding:0 4px}
+.overview-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(120px, 1fr));gap:8px;margin-bottom:20px;padding:0 4px}
 .ov-card{border-radius:8px;padding:8px 10px;border:1px solid var(--color-border-tertiary);cursor:pointer;transition:border-color .2s}
 .ov-card:hover{border-color:var(--color-border-primary)}
 .ov-num{font-size:18px;font-weight:500;line-height:1}
@@ -106,19 +143,27 @@ h1{font-size:20px;font-weight:500;text-align:center;margin-bottom:4px;color:var(
 }
 .floating-download{
   position:fixed;
-  bottom:20px;
-  right:20px;
+  bottom:15px;
+  right:15px;
   background:#000;
   color:#00eaff;
   border:1px solid #00eaff;
-  padding:10px 14px;
+  padding:8px 12px;
   border-radius:30px;
   text-decoration:none;
-  font-size:12px;
+  font-size:11px;
   box-shadow:0 0 10px #00eaff55;
   z-index:999;
 }
-
+@media (max-width:600px){
+  .floating-download{
+    left:50%;
+    transform:translateX(-50%);
+    right:auto;
+    width:90%;
+    text-align:center;
+  }
+}
 .floating-download:hover{
   background:#00eaff;
   color:#000;
@@ -130,6 +175,11 @@ h1{font-size:20px;font-weight:500;text-align:center;margin-bottom:4px;color:var(
   color: #f0c860;
   letter-spacing: -0.01em;
   line-height: 1.1;
+}
+@media (max-width:600px){
+  .section:hover{
+    box-shadow:none;
+  }
 }
 </style>
 </head>
@@ -407,13 +457,26 @@ function buildToc(){
     const b=document.createElement('button');
     b.className='toc-btn';b.textContent=ch.label.split('—')[0].trim();
     b.onclick=()=>{
-      const el=document.getElementById(ch.id);
-      el.scrollIntoView({behavior:'smooth',block:'start'});
-      // open it
-      const body=el.querySelector('.sec-body');
-      const arr=el.querySelector('.sec-arrow');
-      if(!body.classList.contains('open')){body.classList.add('open');arr.classList.add('open');}
-    };
+  const el=document.getElementById(ch.id);
+
+  // CLOSE all sections first
+  document.querySelectorAll('.sec-body').forEach(b=>{
+    b.classList.remove('open');
+  });
+  document.querySelectorAll('.sec-arrow').forEach(a=>{
+    a.classList.remove('open');
+  });
+
+  // OPEN selected section
+  const body=el.querySelector('.sec-body');
+  const arr=el.querySelector('.sec-arrow');
+
+  body.classList.add('open');
+  arr.classList.add('open');
+
+  // SCROLL after opening (better UX)
+  el.scrollIntoView({behavior:'smooth',block:'start'});
+};
     tb.appendChild(b);
   });
 }
@@ -456,23 +519,41 @@ function buildSections(){
   });
 }
 
+
+
 function toggle(id){
-  const body=document.getElementById('body-'+id);
-  const arr=document.getElementById('arr-'+id);
+  const allBodies = document.querySelectorAll('.sec-body');
+  const allArrows = document.querySelectorAll('.sec-arrow');
+
+  allBodies.forEach(b => {
+    if(b.id !== 'body-' + id){
+      b.classList.remove('open');
+    }
+  });
+
+  allArrows.forEach(a => {
+    if(a.id !== 'arr-' + id){
+      a.classList.remove('open');
+    }
+  });
+
+  // Toggle current
+  const body = document.getElementById('body-' + id);
+  const arr = document.getElementById('arr-' + id);
+
   body.classList.toggle('open');
   arr.classList.toggle('open');
 }
-
 buildOverview();
 buildToc();
 buildNewProv();
 buildSections();
 
 // open ch12 and ch13 by default (most tested)
-['ch12','ch13','ch20'].forEach(id=>{
-  document.getElementById('body-'+id).classList.add('open');
-  document.getElementById('arr-'+id).classList.add('open');
-});
+// ['ch12','ch13','ch20'].forEach(id=>{
+//   document.getElementById('body-'+id).classList.add('open');
+//   document.getElementById('arr-'+id).classList.add('open');
+// });
 </script>
 <div style="text-align:center; margin-bottom:16px;">
   <a href="https://www.indiacode.nic.in/bitstream/123456789/20062/1/a202345.pdf" target="_blank" download class="floating-download">
@@ -481,4 +562,3 @@ buildSections();
 </div>
 </body>
 </html>
-
