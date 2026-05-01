@@ -1,0 +1,484 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --color-background-primary:#000;
+  --color-background-secondary:#111;
+
+  --color-text-primary:#ffffff;
+  --color-text-secondary:#b3b3b3;
+  --color-text-tertiary:#808080;
+
+  --color-border-primary:#333;
+  --color-border-secondary:#2a2a2a;
+  --color-border-tertiary:#222;
+}
+
+body{
+  font-family:var(--font-sans,"Anthropic Sans",sans-serif);
+  background:var(--color-background-primary);
+  color:var(--color-text-primary);
+}
+.wrap{padding:16px 0 32px}
+
+h1{font-size:20px;font-weight:500;text-align:center;margin-bottom:4px;color:var(--color-text-primary)}
+.subtitle{font-size:12px;color:var(--color-text-secondary);text-align:center;margin-bottom:18px}
+.toc{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:20px;padding:0 8px}
+.toc-btn{font-size:11px;padding:4px 10px;border-radius:20px;border:1px solid var(--color-border-secondary);background:var(--color-background-secondary);color:var(--color-text-secondary);cursor:pointer;transition:all .2s}
+.toc-btn:hover,.toc-btn.active{background:var(--color-text-primary);color:var(--color-background-primary)}
+.section{
+  margin-bottom:20px;
+  border-radius:12px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.08);
+  background:#050505;
+  transition:all 0.3s ease;
+}
+.sec-header{
+  color: #622b8b;
+  padding:10px 16px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+  user-select:none;
+  position:relative;
+  z-index:1;
+}
+.sec-label{font-size:13px;font-weight:500}
+.sec-meta{font-size:11px;color:var(--color-text-tertiary);margin-left:auto}
+.sec-arrow{font-size:12px;color:var(--color-text-tertiary);transition:transform .2s}
+.sec-arrow.open{transform:rotate(90deg)}
+.sec-body{display:none;padding:0 12px 12px}
+.sec-body.open{display:block}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-top:10px}
+.card{background:#0d0d0d; border-radius:8px;padding:10px 12px;border:1px solid var(--color-border-tertiary)}
+.card-title{font-size:12px;font-weight:500;margin-bottom:4px}
+.card-body{font-size:11px;color:var(--color-text-secondary);line-height:1.6}
+.pill{display:inline-block;font-size:10px;padding:2px 7px;border-radius:10px;margin:2px 2px 0 0;font-weight:500}
+.tag-sec{color:#0C447C;background:#E6F1FB}.tag-off{color:#3B6D11;background:#EAF3DE}.tag-pen{color:#993C1D;background:#FAECE7}.tag-proc{color:#533AB7;background:#EEEDFE}.tag-new{color:#854F0B;background:#FAEEDA}
+/* colour bands */
+.band-blue .sec-header{background:#E6F1FB}.band-teal .sec-header{background:#E1F5EE}.band-coral .sec-header{background:#FAECE7}.band-purple .sec-header{background:#EEEDFE}.band-amber .sec-header{background:#FAEEDA}.band-green .sec-header{background:#EAF3DE}.band-pink .sec-header{background:#FBEAF0}.band-gray .sec-header{background:#F1EFE8}.band-red .sec-header{background:#FCEBEB}
+@media(prefers-color-scheme:dark){
+.band-blue .sec-header{background:#0C447C22}.band-teal .sec-header{background:#08504122}.band-coral .sec-header{background:#71281322}.band-purple .sec-header{background:#3C348922}.band-amber .sec-header{background:#63380622}.band-green .sec-header{background:#27500A22}.band-pink .sec-header{background:#72243E22}.band-gray .sec-header{background:#44444122}.band-red .sec-header{background:#791F1F22}
+.tag-sec{color:#85B7EB;background:#042C5333}.tag-off{color:#97C459;background:#17340433}.tag-pen{color:#F0997B;background:#4A1B0C33}.tag-proc{color:#AFA9EC;background:#26215C33}.tag-new{color:#FAC775;background:#41240233}
+}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;justify-content:center;padding:0 8px}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--color-text-secondary)}
+.dot{width:10px;height:10px;border-radius:50%}
+.overview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin-bottom:20px;padding:0 4px}
+.ov-card{border-radius:8px;padding:8px 10px;border:1px solid var(--color-border-tertiary);cursor:pointer;transition:border-color .2s}
+.ov-card:hover{border-color:var(--color-border-primary)}
+.ov-num{font-size:18px;font-weight:500;line-height:1}
+.ov-label{font-size:10px;color:var(--color-text-secondary);margin-top:2px}
+/* NEON GLOW EFFECT */
+.band-blue:hover{
+  box-shadow:0 0 8px #00c3ff, 0 0 20px #00c3ff33;
+}
+.band-teal:hover{
+  box-shadow:0 0 8px #00ffcc, 0 0 20px #00ffcc33;
+}
+.band-coral:hover{
+  box-shadow:0 0 8px #ff6a3d, 0 0 20px #ff6a3d33;
+}
+.band-purple:hover{
+  box-shadow:0 0 8px #9b7bff, 0 0 20px #9b7bff33;
+}
+.band-amber:hover{
+  box-shadow:0 0 8px #ffb300, 0 0 20px #ffb30033;
+}
+.band-green:hover{
+  box-shadow:0 0 8px #39ff14, 0 0 20px #39ff1433;
+}
+.band-pink:hover{
+  box-shadow:0 0 8px #ff4da6, 0 0 20px #ff4da633;
+}
+.band-gray:hover{
+  box-shadow:0 0 8px #aaaaaa, 0 0 20px #aaaaaa33;
+}
+.band-red:hover{
+  box-shadow:0 0 8px #ff2e2e, 0 0 20px #ff2e2e33;
+}
+.floating-download{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#000;
+  color:#00eaff;
+  border:1px solid #00eaff;
+  padding:10px 14px;
+  border-radius:30px;
+  text-decoration:none;
+  font-size:12px;
+  box-shadow:0 0 10px #00eaff55;
+  z-index:999;
+}
+
+.floating-download:hover{
+  background:#00eaff;
+  color:#000;
+}
+.hade{
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 5vw, 56px);
+  font-weight: 500;
+  color: #f0c860;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+</style>
+</head>
+<body>
+<div  class="wrap">
+<h1 class="hade">Bharatiya Nyaya Sanhita (BNS), 2023</h1>
+<div class="subtitle">Complete Study Diagram · Replaces IPC 1860 · Effective 1 July 2024 · 358 Sections · 20 Chapters</div>
+
+<div class="legend">
+  <div class="legend-item"><span class="dot" style="background:#185FA5"></span>Section ref</div>
+  <div class="legend-item"><span class="dot" style="background:#3B6D11"></span>Offence</div>
+  <div class="legend-item"><span class="dot" style="background:#993C1D"></span>Penalty</div>
+  <div class="legend-item"><span class="dot" style="background:#533AB7"></span>Procedure note</div>
+  <div class="legend-item"><span class="dot" style="background:#854F0B"></span>New / changed</div>
+</div>
+
+<div class="overview-grid" id="ov-grid"></div>
+<div class="toc" id="toc-bar"></div>
+<div id="sections-wrap"></div>
+</div>
+
+<script>
+const data=[
+{id:"ch1",band:"blue",label:"Chapter I — Preliminary",secs:"1–10",desc:"Definitions, commencement, extent",cards:[
+{t:"Short title & commencement",b:'<span class="pill tag-sec">S.1</span> BNS 2023; enforced 1 July 2024. Repeals IPC 1860.'},
+{t:"Extent",b:'<span class="pill tag-sec">S.1</span> Extends to whole of India. Applies to offences committed by any person.'},
+{t:"Definitions (key terms)",b:'<span class="pill tag-sec">S.2</span> Child (under 18). Document. Electronic record. Gender-neutral pronoun. India. Judge. Public servant. Valuable security.'},
+{t:"Act & omission",b:'<span class="pill tag-sec">S.3</span> Words denoting act include illegal omissions.'},
+{t:"Sentence of imprisonment",b:'<span class="pill tag-sec">S.4</span> Includes both rigorous and simple.'},
+{t:"Fractions of terms",b:'<span class="pill tag-sec">S.5</span> Fractions of terms in days calculated.'},
+{t:"Offences by companies",b:'<span class="pill tag-sec">S.9</span> <span class="pill tag-new">Retained + updated</span> Company, director, officer liable for offences committed by company.'},
+{t:"Saving of certain laws",b:'<span class="pill tag-sec">S.10</span> Customs, other special laws unaffected.'},
+]},
+{id:"ch2",band:"teal",label:"Chapter II — Punishments",secs:"4–21",desc:"Types of punishment, community service, fines",cards:[
+{t:"General punishments",b:'<span class="pill tag-sec">S.4</span> Death. Imprisonment for life. Rigorous imprisonment. Simple imprisonment. Forfeiture of property. Fine. Community service.'},
+{t:"Community service",b:'<span class="pill tag-new">NEW</span> <span class="pill tag-pen">New punishment</span> Replaces minor imprisonment for minor offences. Court-assigned public work.'},
+{t:"Death penalty",b:'<span class="pill tag-pen">Punishment</span> Retained for murder, terrorism, gang rape of minor, treason.'},
+{t:"Imprisonment for life",b:'<span class="pill tag-pen">Punishment</span> Default alternate to death in many offences. Means remainder of natural life.'},
+{t:"Forfeiture",b:'<span class="pill tag-sec">S.7</span> Forfeiture of property used in or obtained through commission of offence.'},
+{t:"Fines",b:'<span class="pill tag-sec">S.8</span> Fine as standalone or cumulative punishment. Imprisonment in default of fine.'},
+{t:"Solitary confinement",b:'<span class="pill tag-sec">S.11–12</span> Max 3 months; 14 days at a stretch; only with rigorous imprisonment.'},
+{t:"Enhanced punishment for recidivists",b:'<span class="pill tag-sec">S.13</span> Previous conviction for same offence → enhanced sentence possible.'},
+]},
+{id:"ch3",band:"coral",label:"Chapter III — General Exceptions",secs:"14–44",desc:"Defences available to accused",cards:[
+{t:"Act of State",b:'<span class="pill tag-sec">S.14</span> <span class="pill tag-proc">Defence</span> Acts by or under authority of sovereign.'},
+{t:"Judicial acts",b:'<span class="pill tag-sec">S.15</span> Judge acting judicially; officer executing order.'},
+{t:"Accident",b:'<span class="pill tag-sec">S.16</span> Lawful act, lawful means, no criminal intention or negligence.'},
+{t:"Necessity",b:'<span class="pill tag-sec">S.17</span> To avoid greater harm; harm to third party permissible if proportionate.'},
+{t:"Consent",b:'<span class="pill tag-sec">S.18–20</span> Consent negates offence if freely given, not under misconception or coercion.'},
+{t:"Good faith",b:'<span class="pill tag-sec">S.21</span> Due care + attention = good faith. Many exceptions turn on this.'},
+{t:"Insanity",b:'<span class="pill tag-sec">S.22</span> Unsound mind at time of act; no knowledge of nature or wrongness.'},
+{t:"Intoxication",b:'<span class="pill tag-sec">S.23</span> If administered without knowledge or against will — full defence. Voluntary → partial.'},
+{t:"Infancy",b:'<span class="pill tag-sec">S.24–26</span> Under 7 → absolute; 7–12 immature understanding → defence. Over 12 → full liability.'},
+{t:"Mistake of fact",b:'<span class="pill tag-sec">S.27</span> Bonafide belief in fact making act lawful; mistake of law not a defence.'},
+{t:"Right of private defence — body",b:'<span class="pill tag-sec">S.34–41</span> <span class="pill tag-sec">Defence</span> Right to defend own or another\'s body. Extends to causing death if: assault causing grievous hurt, assault with deadly weapon, kidnapping, rape, acid attack.'},
+{t:"Right of private defence — property",b:'<span class="pill tag-sec">S.42–44</span> Right to defend movable/immovable property. Death only if robbery, house-breaking by night, arson, mischief.'},
+]},
+{id:"ch4",band:"purple",label:"Chapter IV — Abetment, Conspiracy, Attempt",secs:"45–62",desc:"Inchoate offences and group liability",cards:[
+{t:"Abetment defined",b:'<span class="pill tag-sec">S.45</span> Instigation, conspiracy, intentional aid. All three modes covered.'},
+{t:"Abettor present at commission",b:'<span class="pill tag-sec">S.46</span> Same punishment as principal unless lesser provided.'},
+{t:"Abetment when act differs",b:'<span class="pill tag-sec">S.47</span> Abettor liable for probable consequences if act different from intended.'},
+{t:"Abetment of suicide",b:'<span class="pill tag-sec">S.53</span> Upto 10 years + fine. Death if abetment of suicide of child / insane / intoxicated person.'},
+{t:"Criminal conspiracy",b:'<span class="pill tag-sec">S.61</span> <span class="pill tag-off">Offence</span> Agreement to commit offence or illegal act. Serious offence → same as abetment. Petty → 6 months.'},
+{t:"Attempt",b:'<span class="pill tag-sec">S.62</span> Half the punishment of completed offence unless otherwise specified.'},
+{t:"Common intention",b:'<span class="pill tag-sec">S.3(5)</span> Acts by several persons with common intention — each liable as if done by all.'},
+]},
+{id:"ch5",band:"amber",label:"Chapter V — Offences Against State",secs:"147–159",desc:"Treason, sedition, anti-state acts",cards:[
+{t:"Waging war against India",b:'<span class="pill tag-sec">S.147</span> <span class="pill tag-pen">Death or Life</span> Waging or attempting war against Government of India.'},
+{t:"Conspiracy to wage war",b:'<span class="pill tag-sec">S.148</span> <span class="pill tag-pen">Life or 10 yr</span>'},
+{t:"Collecting arms etc.",b:'<span class="pill tag-sec">S.149</span> <span class="pill tag-pen">Life or 10 yr</span> With intent to wage war.'},
+{t:"Concealment of design",b:'<span class="pill tag-sec">S.150</span> <span class="pill tag-pen">10 yr / fine</span> Knowing and not disclosing designs to wage war.'},
+{t:"Sedition → Sec 152",b:'<span class="pill tag-new">CHANGED</span> <span class="pill tag-sec">S.152</span> IPC S.124A replaced. Now: acts endangering sovereignty, unity, integrity of India; inciting rebellion. Upto life imprisonment.'},
+{t:"Assaulting President/Governor",b:'<span class="pill tag-sec">S.153</span> <span class="pill tag-pen">7 yr + fine</span>'},
+{t:"Unlawful assemblies & riots",b:'<span class="pill tag-sec">S.187–195</span> Unlawful assembly (5+), rioting, armed rioting, promoting enmity between groups.'},
+]},
+{id:"ch6",band:"green",label:"Chapter VI — Offences Against Public Tranquillity",secs:"187–197",desc:"Riots, assemblies, promoting enmity",cards:[
+{t:"Unlawful assembly",b:'<span class="pill tag-sec">S.189</span> 5 or more persons, common object to commit offence / intimidate. Every member liable.'},
+{t:"Being member of unlawful assembly",b:'<span class="pill tag-sec">S.190</span> <span class="pill tag-pen">6 months / fine</span>'},
+{t:"Rioting",b:'<span class="pill tag-sec">S.191</span> <span class="pill tag-pen">2 yr / fine</span> Any member uses force or violence.'},
+{t:"Rioting with deadly weapon",b:'<span class="pill tag-sec">S.191(2)</span> <span class="pill tag-pen">3 yr / fine</span>'},
+{t:"Promoting enmity between groups",b:'<span class="pill tag-sec">S.196</span> <span class="pill tag-pen">3–5 yr</span> Religion, race, place of birth, language, caste.'},
+{t:"Imputations against national integration",b:'<span class="pill tag-sec">S.197</span> <span class="pill tag-pen">3 yr / fine</span>'},
+]},
+{id:"ch7",band:"pink",label:"Chapter VII — Offences by Public Servants",secs:"197–237",desc:"Corruption, abuse of power, disobedience",cards:[
+{t:"Public servant defined",b:'<span class="pill tag-sec">S.2(q)</span> Wide definition includes judges, legislators, police, military, arbitrators, officers of state.'},
+{t:"Disobeying law by public servant",b:'<span class="pill tag-sec">S.197</span> <span class="pill tag-pen">Simple 1 yr / fine</span>'},
+{t:"Framing incorrect document",b:'<span class="pill tag-sec">S.217</span> <span class="pill tag-pen">3 yr / fine</span>'},
+{t:"Illegal gratification",b:'<span class="pill tag-sec">S.219–220</span> Accepting gratification other than salary. <span class="pill tag-pen">3 yr / fine</span>'},
+{t:"Illegal gratification in legal cases",b:'<span class="pill tag-sec">S.221</span> <span class="pill tag-pen">7 yr / fine</span>'},
+{t:"Wrongful confinement by PS",b:'<span class="pill tag-sec">S.224</span> <span class="pill tag-pen">3 yr + fine</span>'},
+{t:"Unlawful search",b:'<span class="pill tag-sec">S.226</span> Illegal search or confinement by public servant.'},
+{t:"Abusing position to frame charge",b:'<span class="pill tag-sec">S.217</span> Framing incorrect charge to injure a person.'},
+]},
+{id:"ch8",band:"blue",label:"Chapter VIII — Contempts of Lawful Authority",secs:"238–267",desc:"Failure to cooperate with public authorities",cards:[
+{t:"Omission to assist public servant",b:'<span class="pill tag-sec">S.238</span> <span class="pill tag-pen">1 month / ₹5000 fine</span>'},
+{t:"Disobedience of order promulgated by public servant",b:'<span class="pill tag-sec">S.239</span> <span class="pill tag-pen">6 months / fine</span>'},
+{t:"Threatening witness",b:'<span class="pill tag-sec">S.245–246</span> <span class="pill tag-pen">3–7 yr</span>'},
+{t:"False information to public servant",b:'<span class="pill tag-sec">S.248</span> <span class="pill tag-pen">6 months / fine</span>'},
+{t:"Refusing oath / affirmation",b:'<span class="pill tag-sec">S.253</span> <span class="pill tag-pen">7 days / fine</span>'},
+{t:"Obstruction of sale / public auction",b:'<span class="pill tag-sec">S.260</span> <span class="pill tag-pen">1 month / fine</span>'},
+]},
+{id:"ch9",band:"teal",label:"Chapter IX — False Evidence & Perjury",secs:"227–246",desc:"Perjury, fabrication of evidence, false statements",cards:[
+{t:"Giving false evidence",b:'<span class="pill tag-sec">S.229</span> <span class="pill tag-pen">7 yr + fine</span> Intentional false statement under oath in judicial proceeding.'},
+{t:"Fabricating evidence",b:'<span class="pill tag-sec">S.230</span> <span class="pill tag-pen">7 yr + fine</span> Creating false evidence intending it to be used.'},
+{t:"False evidence causing death",b:'<span class="pill tag-sec">S.230</span> <span class="pill tag-pen">Death or Life</span> If innocent person executed.'},
+{t:"Using fabricated evidence",b:'<span class="pill tag-sec">S.232</span> <span class="pill tag-pen">Same as giving false evidence</span>'},
+{t:"Issuing false certificate",b:'<span class="pill tag-sec">S.235</span> <span class="pill tag-pen">3 yr / fine</span>'},
+{t:"False statement in declaration",b:'<span class="pill tag-sec">S.236</span> <span class="pill tag-pen">3 yr / fine</span>'},
+{t:"Destroying evidence",b:'<span class="pill tag-sec">S.238</span> <span class="pill tag-pen">3 yr + fine</span>'},
+{t:"Protecting offender with false info",b:'<span class="pill tag-sec">S.239</span> <span class="pill tag-pen">2 yr / fine</span>'},
+]},
+{id:"ch10",band:"coral",label:"Chapter X — Offences Against Public Health",secs:"268–291",desc:"Nuisance, adulteration, spread of disease",cards:[
+{t:"Public nuisance",b:'<span class="pill tag-sec">S.268–270</span> Acts causing common injury, danger, annoyance to public. Fine.'},
+{t:"Adulteration of food/drink",b:'<span class="pill tag-sec">S.272</span> <span class="pill tag-pen">6 months / fine</span>'},
+{t:"Sale of noxious food",b:'<span class="pill tag-sec">S.273</span> <span class="pill tag-pen">6 months / fine</span>'},
+{t:"Adulteration of drugs",b:'<span class="pill tag-sec">S.274</span> <span class="pill tag-pen">1 yr / fine</span>'},
+{t:"Sale of adulterated drugs",b:'<span class="pill tag-sec">S.275</span> <span class="pill tag-pen">1 yr / fine</span>'},
+{t:"Spreading infection",b:'<span class="pill tag-sec">S.269–271</span> Disobeying quarantine rules; negligent acts likely to spread disease.'},
+{t:"Fouling water supply",b:'<span class="pill tag-sec">S.277</span> <span class="pill tag-pen">3 months / fine</span>'},
+{t:"Obscene acts in public",b:'<span class="pill tag-sec">S.291</span> <span class="pill tag-pen">3 months / fine</span>'},
+]},
+{id:"ch11",band:"purple",label:"Chapter XI — Religion Offences",secs:"292–298",desc:"Offences relating to religion and religious feelings",cards:[
+{t:"Injuring religious places",b:'<span class="pill tag-sec">S.294</span> <span class="pill tag-pen">2 yr / fine</span> Destroying place of worship or object held sacred.'},
+{t:"Trespassing on burial grounds",b:'<span class="pill tag-sec">S.295</span> <span class="pill tag-pen">1 yr / fine</span>'},
+{t:"Disturbing religious assembly",b:'<span class="pill tag-sec">S.296</span> <span class="pill tag-pen">1 yr / fine</span>'},
+{t:"Trespassing on place of worship",b:'<span class="pill tag-sec">S.295</span> <span class="pill tag-pen">1 yr / fine</span>'},
+{t:"Deliberate acts to outrage religion",b:'<span class="pill tag-sec">S.299</span> <span class="pill tag-pen">3 yr / fine</span> Intentional acts outraging religious feelings.'},
+]},
+{id:"ch12",band:"amber",label:"Chapter XII — Offences Against the Person",secs:"100–146",desc:"Culpable homicide, murder, hurt, grievous hurt, wrongful restraint, force",cards:[
+{t:"Culpable homicide (CH)",b:'<span class="pill tag-sec">S.100</span> Causing death with intent/knowledge. Not amounting to murder → 10 yr / life.'},
+{t:"Murder",b:'<span class="pill tag-sec">S.101</span> CH + one of 4 clauses (premeditation, extreme cruelty, murder for gain, murder of officer). <span class="pill tag-pen">Death or Life</span>'},
+{t:"Culpable homicide by negligence",b:'<span class="pill tag-sec">S.106</span> <span class="pill tag-pen">5 yr + fine</span>. If by registered medical practitioner: 2 yr + fine.'},
+{t:"Dowry death",b:'<span class="pill tag-sec">S.80</span> <span class="pill tag-pen">Min 7 yr, upto Life</span> Death within 7 years of marriage; related to cruelty or harassment for dowry.'},
+{t:"Grievous hurt",b:'<span class="pill tag-sec">S.116</span> 8 categories: emasculation, permanent loss of sight/hearing, severe disfigurement, fracture, life-threatening harm. <span class="pill tag-pen">7 yr / fine</span>'},
+{t:"Hurt",b:'<span class="pill tag-sec">S.114</span> Causing bodily pain, disease, infirmity. <span class="pill tag-pen">1 yr / fine</span>'},
+{t:"Wrongful restraint",b:'<span class="pill tag-sec">S.124</span> <span class="pill tag-pen">1 month / fine</span>'},
+{t:"Wrongful confinement",b:'<span class="pill tag-sec">S.125</span> <span class="pill tag-pen">1 yr / fine</span> Upto 3 yr if > 3 days; upto 10 days → 3 yr; by false information → 3 yr.'},
+{t:"Assault",b:'<span class="pill tag-sec">S.129</span> Making gesture/preparation to cause apprehension of force. <span class="pill tag-pen">3 months / fine</span>'},
+{t:"Criminal force",b:'<span class="pill tag-sec">S.130</span> Using force without consent; with intent to injure. <span class="pill tag-pen">3 months / fine</span>'},
+{t:"Kidnapping from India",b:'<span class="pill tag-sec">S.137(1)</span> Taking minor or person of unsound mind outside India without lawful guardian consent.'},
+{t:"Kidnapping from lawful guardianship",b:'<span class="pill tag-sec">S.137(2)</span> <span class="pill tag-pen">7 yr + fine</span>'},
+{t:"Abduction",b:'<span class="pill tag-sec">S.138</span> Compelling or inducing to go from place by force/deceit.'},
+{t:"Kidnapping for ransom",b:'<span class="pill tag-sec">S.140</span> <span class="pill tag-pen">Death or Life + fine</span>'},
+{t:"Slavery / forced labour",b:'<span class="pill tag-sec">S.143</span> <span class="pill tag-pen">7 yr + fine</span>'},
+]},
+{id:"ch13",band:"green",label:"Chapter XIII — Sexual Offences",secs:"63–99",desc:"Rape, sexual assault, stalking, voyeurism, trafficking",cards:[
+{t:"Rape",b:'<span class="pill tag-sec">S.63</span> <span class="pill tag-pen">Rigorous min 10 yr, upto Life + fine</span> Non-consensual penetration. Gender-specific (man on woman).'},
+{t:"Rape by husband during separation",b:'<span class="pill tag-sec">S.63 Exception 2</span> <span class="pill tag-pen">2–7 yr</span>'},
+{t:"Gang rape",b:'<span class="pill tag-sec">S.70</span> <span class="pill tag-pen">Life (remainder of natural life) + fine</span> Each member of group liable.'},
+{t:"Gang rape of woman < 18",b:'<span class="pill tag-sec">S.70(2)</span> <span class="pill tag-pen">Death or Life</span> <span class="pill tag-new">New provision</span>'},
+{t:"Rape causing death or persistent vegetative state",b:'<span class="pill tag-sec">S.66</span> <span class="pill tag-pen">Rigorous 20 yr upto Life / death</span>'},
+{t:"Rape of woman under 12",b:'<span class="pill tag-sec">S.65(2)</span> <span class="pill tag-pen">Rigorous min 20 yr upto Life / death</span>'},
+{t:"Rape of woman under 16",b:'<span class="pill tag-sec">S.65(1)</span> <span class="pill tag-pen">Rigorous min 20 yr upto Life</span>'},
+{t:"Sexual harassment",b:'<span class="pill tag-sec">S.74</span> <span class="pill tag-pen">3 yr / fine</span> Unwanted physical contact, sexual overtures, showing pornography.'},
+{t:"Sexual assault",b:'<span class="pill tag-sec">S.75</span> <span class="pill tag-pen">Min 1 yr upto 7 yr + fine</span>'},
+{t:"Voyeurism",b:'<span class="pill tag-sec">S.77</span> <span class="pill tag-pen">1–3 yr / fine (first). 3–7 yr (subsequent)</span>'},
+{t:"Stalking",b:'<span class="pill tag-sec">S.78</span> <span class="pill tag-pen">3 yr / fine (first). 5 yr (subsequent)</span> Monitoring online activity included. <span class="pill tag-new">Updated</span>'},
+{t:"Word / gesture outraging modesty",b:'<span class="pill tag-sec">S.79</span> <span class="pill tag-pen">3 yr / fine</span>'},
+{t:"Trafficking of persons",b:'<span class="pill tag-sec">S.143</span> <span class="pill tag-pen">7–10 yr + fine</span>. Repeat offender: Life.'},
+{t:"Trafficking of minor",b:'<span class="pill tag-sec">S.143</span> <span class="pill tag-pen">10 yr – Life</span>'},
+{t:"Trafficking for purpose of sexual exploitation",b:'<span class="pill tag-sec">S.143</span> <span class="pill tag-pen">Life + fine</span>'},
+{t:"Acid attack",b:'<span class="pill tag-sec">S.124</span> <span class="pill tag-pen">Min 10 yr upto Life + fine</span> <span class="pill tag-new">New dedicated section</span>'},
+{t:"Attempt to acid attack",b:'<span class="pill tag-sec">S.125</span> <span class="pill tag-pen">5–7 yr + fine</span>'},
+]},
+{id:"ch14",band:"pink",label:"Chapter XIV — Defamation & Related",secs:"354–358",desc:"Defamation, criminal intimidation, insult, obscenity",cards:[
+{t:"Defamation",b:'<span class="pill tag-sec">S.354</span> <span class="pill tag-pen">2 yr / fine</span> Publication of imputation. Exceptions for public good, true statements of public interest, fair comment.'},
+{t:"Criminal intimidation",b:'<span class="pill tag-sec">S.351</span> <span class="pill tag-pen">2 yr / fine</span>. Anonymous → 2 yr extra.'},
+{t:"Insult provoking breach of peace",b:'<span class="pill tag-sec">S.352</span> <span class="pill tag-pen">3 months / fine</span>'},
+{t:"Criminal force to woman",b:'<span class="pill tag-sec">S.353</span> <span class="pill tag-pen">1 yr / fine</span> Assault on woman with intent to outrage modesty.'},
+]},
+{id:"ch15",band:"gray",label:"Chapter XV — Theft, Robbery & Dacoity",secs:"303–316",desc:"Property offences involving force or stealth",cards:[
+{t:"Theft",b:'<span class="pill tag-sec">S.303</span> Dishonest taking of movable property without consent. <span class="pill tag-pen">3 yr + fine</span>'},
+{t:"Theft in dwelling / vessel",b:'<span class="pill tag-sec">S.305</span> <span class="pill tag-pen">7 yr + fine</span>'},
+{t:"Theft by clerk / servant",b:'<span class="pill tag-sec">S.306</span> <span class="pill tag-pen">7 yr + fine</span>'},
+{t:"Robbery",b:'<span class="pill tag-sec">S.309</span> Theft or extortion with use/threat of force on person. <span class="pill tag-pen">10 yr + fine</span>'},
+{t:"Robbery on highway",b:'<span class="pill tag-sec">S.309(3)</span> <span class="pill tag-pen">Life or 14 yr</span>'},
+{t:"Dacoity",b:'<span class="pill tag-sec">S.310</span> Robbery by 5 or more persons. <span class="pill tag-pen">Life or 10 yr + fine</span>'},
+{t:"Dacoity with murder",b:'<span class="pill tag-sec">S.311</span> <span class="pill tag-pen">Death or Life</span>'},
+{t:"Attempting dacoity",b:'<span class="pill tag-sec">S.312</span> <span class="pill tag-pen">7 yr + fine</span>'},
+{t:"Belonging to gang of dacoits",b:'<span class="pill tag-sec">S.313</span> <span class="pill tag-pen">Life or 7 yr</span>'},
+{t:"Harbouring robbers/dacoits",b:'<span class="pill tag-sec">S.315</span> <span class="pill tag-pen">7 yr + fine</span>'},
+]},
+{id:"ch16",band:"blue",label:"Chapter XVI — Cheating & Criminal Breach of Trust",secs:"316–333",desc:"Fraud, cheating, breach of trust, extortion",cards:[
+{t:"Cheating",b:'<span class="pill tag-sec">S.316</span> Deceiving into delivering property or consenting to act. <span class="pill tag-pen">1 yr / fine</span>'},
+{t:"Cheating causing delivery of property",b:'<span class="pill tag-sec">S.316(2)</span> <span class="pill tag-pen">3 yr + fine</span>'},
+{t:"Cheating by personation",b:'<span class="pill tag-sec">S.319</span> <span class="pill tag-pen">3 yr / fine</span>'},
+{t:"Criminal breach of trust (CBT)",b:'<span class="pill tag-sec">S.316</span> Dishonest misappropriation of entrusted property. <span class="pill tag-pen">3 yr / fine</span>'},
+{t:"CBT by public servant",b:'<span class="pill tag-sec">S.317</span> <span class="pill tag-pen">Life or 10 yr</span>'},
+{t:"CBT by merchant / agent",b:'<span class="pill tag-sec">S.318</span> <span class="pill tag-pen">7 yr</span>'},
+{t:"Extortion",b:'<span class="pill tag-sec">S.308</span> Putting person in fear, compelling delivery. <span class="pill tag-pen">3 yr / fine</span>'},
+{t:"Extortion by threat of accusation",b:'<span class="pill tag-sec">S.308(2)</span> <span class="pill tag-pen">10 yr + fine</span>'},
+{t:"Dishonest misappropriation",b:'<span class="pill tag-sec">S.314</span> <span class="pill tag-pen">2 yr / fine</span>'},
+]},
+{id:"ch17",band:"teal",label:"Chapter XVII — Mischief, Trespass, House-breaking",secs:"317–342",desc:"Damage to property, criminal trespass",cards:[
+{t:"Mischief",b:'<span class="pill tag-sec">S.324</span> Destroying / damaging property with intent to cause wrongful loss. <span class="pill tag-pen">3 months / fine</span>'},
+{t:"Mischief causing damage > ₹20000",b:'<span class="pill tag-sec">S.324(3)</span> <span class="pill tag-pen">2 yr / fine</span>'},
+{t:"Mischief to irrigation works / roads",b:'<span class="pill tag-sec">S.325</span> <span class="pill tag-pen">5 yr / fine</span>'},
+{t:"Mischief to railway property",b:'<span class="pill tag-sec">S.326</span> <span class="pill tag-pen">Life or imprisonment</span>'},
+{t:"Criminal trespass",b:'<span class="pill tag-sec">S.329</span> Entering property of another to commit offence / intimidate / annoy. <span class="pill tag-pen">3 months / fine</span>'},
+{t:"House trespass",b:'<span class="pill tag-sec">S.330</span> <span class="pill tag-pen">1 yr / fine</span>'},
+{t:"House trespass to commit offence",b:'<span class="pill tag-sec">S.330</span> <span class="pill tag-pen">2 yr / fine</span>'},
+{t:"House-breaking",b:'<span class="pill tag-sec">S.331</span> 6 modes: through aperture not meant for entry; through lock-breaking; using false key; through open window; by personating resident; assault. <span class="pill tag-pen">2 yr / fine</span>'},
+{t:"House-breaking by night",b:'<span class="pill tag-sec">S.331(3)</span> <span class="pill tag-pen">3 yr / fine</span>'},
+{t:"House-breaking to commit offence",b:'<span class="pill tag-sec">S.332</span> <span class="pill tag-pen">Up to same as offence intended + up to 3 yr</span>'},
+]},
+{id:"ch18",band:"coral",label:"Chapter XVIII — Documents & Property Marks",secs:"334–349",desc:"Forgery, counterfeiting, false marks",cards:[
+{t:"Forgery",b:'<span class="pill tag-sec">S.334</span> Making false document with intent to fraud. <span class="pill tag-pen">2 yr / fine</span>'},
+{t:"Forgery of court records",b:'<span class="pill tag-sec">S.338</span> <span class="pill tag-pen">Life or 10 yr</span>'},
+{t:"Forging currency / stamps",b:'<span class="pill tag-sec">S.179–192</span> <span class="pill tag-pen">Life</span>'},
+{t:"Using forged document",b:'<span class="pill tag-sec">S.336</span> <span class="pill tag-pen">Same as forgery</span>'},
+{t:"Making forged document",b:'<span class="pill tag-sec">S.337</span> <span class="pill tag-pen">2 yr / fine</span>'},
+{t:"Counterfeiting property mark",b:'<span class="pill tag-sec">S.346</span> <span class="pill tag-pen">1 yr / fine</span>'},
+{t:"Selling goods with false marks",b:'<span class="pill tag-sec">S.348</span> <span class="pill tag-pen">1 yr / fine</span>'},
+]},
+{id:"ch19",band:"purple",label:"Chapter XIX — Criminal Breach of Contracts",secs:"350–353",desc:"Breach impacting public safety and service",cards:[
+{t:"Breach of contract of service",b:'<span class="pill tag-sec">S.350</span> By person employed in public utility services. <span class="pill tag-pen">3 months / fine</span>'},
+]},
+{id:"ch20",band:"amber",label:"Chapter XX — Organised Crime & Terrorism",secs:"109–127",desc:"New chapters on organised crime, terrorism, petty organised crime",cards:[
+{t:"Terrorism",b:'<span class="pill tag-sec">S.113</span> <span class="pill tag-new">NEW Chapter</span> <span class="pill tag-pen">Death or Life + fine</span> Acts threatening unity, sovereignty; bomb blasts; attacking critical infrastructure.'},
+{t:"Financing terrorism",b:'<span class="pill tag-sec">S.113(2)</span> <span class="pill tag-pen">Life + fine</span>'},
+{t:"Harboring terrorist",b:'<span class="pill tag-sec">S.113(3)</span> <span class="pill tag-pen">Life + fine</span>'},
+{t:"Organised crime",b:'<span class="pill tag-sec">S.111</span> <span class="pill tag-new">NEW</span> Syndicate with hierarchical structure. Murder, extortion, kidnapping, financial scams. <span class="pill tag-pen">Death or Life (if death caused); else min 5 yr</span>'},
+{t:"Petty organised crime",b:'<span class="pill tag-sec">S.112</span> <span class="pill tag-new">NEW</span> Snatch theft, mobile theft, chain snatching, pickpocketing, card skimming, shell games. <span class="pill tag-pen">1–7 yr + fine</span>'},
+{t:"Hit-and-run",b:'<span class="pill tag-sec">S.106(2)</span> <span class="pill tag-new">NEW</span> Negligent driving causing death + fleeing without reporting. <span class="pill tag-pen">10 yr + fine</span>'},
+]},
+];
+
+// Key changes summary
+const newItems=[
+"Community service as a new punishment (S.4)",
+"Sedition replaced by S.152 (endangering sovereignty)",
+"Terrorism as a separate chapter (S.113)",
+"Organised crime chapter (S.111)",
+"Petty organised crime (S.112)",
+"Gang rape of minor → Death (S.70(2))",
+"Hit-and-run with death → 10 yr (S.106(2))",
+"Stalking includes online monitoring (S.78)",
+"'India' replaces 'Government of India'",
+"Timeline for trial: 45 days for charge framing; 60 days for prosecution arguments",
+"Zero FIR — any police station must register FIR",
+"E-FIR enabled for specified offences",
+];
+
+function buildOverview(){
+  const og=document.getElementById('ov-grid');
+  const stats=[
+    {num:"358",label:"Total Sections"},
+    {num:"20",label:"Chapters"},
+    {num:"1 Jul 2024",label:"In Force"},
+    {num:"IPC 1860",label:"Replaced"},
+    {num:"511→358",label:"Sections reduced"},
+    {num:"21",label:"New offences added"},
+    {num:"41",label:"Offences amended"},
+    {num:"82",label:"Offences repealed"},
+  ];
+  stats.forEach(s=>{
+    const d=document.createElement('div');
+    d.className='ov-card';
+    d.innerHTML=`<div class="ov-num">${s.num}</div><div class="ov-label">${s.label}</div>`;
+    og.appendChild(d);
+  });
+}
+
+function buildToc(){
+  const tb=document.getElementById('toc-bar');
+  // Add new provisions btn
+  const nb=document.createElement('button');
+  nb.className='toc-btn';nb.textContent='Key New Provisions';
+  nb.onclick=()=>{
+    document.getElementById('new-prov-wrap').style.display=
+      document.getElementById('new-prov-wrap').style.display==='none'?'block':'none';
+  };
+  tb.appendChild(nb);
+  data.forEach(ch=>{
+    const b=document.createElement('button');
+    b.className='toc-btn';b.textContent=ch.label.split('—')[0].trim();
+    b.onclick=()=>{
+      const el=document.getElementById(ch.id);
+      el.scrollIntoView({behavior:'smooth',block:'start'});
+      // open it
+      const body=el.querySelector('.sec-body');
+      const arr=el.querySelector('.sec-arrow');
+      if(!body.classList.contains('open')){body.classList.add('open');arr.classList.add('open');}
+    };
+    tb.appendChild(b);
+  });
+}
+
+function buildNewProv(){
+  const sw=document.getElementById('sections-wrap');
+  const wrap=document.createElement('div');
+  wrap.id='new-prov-wrap';
+  wrap.style.display='none';
+  wrap.style.marginBottom='16px';
+  wrap.style.padding='12px 14px';
+  wrap.style.borderRadius='10px';
+  wrap.style.border='1px solid var(--color-border-secondary)';
+  wrap.innerHTML=`<div style="font-size:13px;font-weight:500;margin-bottom:8px;color:var(--color-text-primary)">Key new & changed provisions</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:6px">${
+    newItems.map(i=>`<div style="font-size:11px;color:var(--color-text-secondary);padding:4px 8px;border-radius:6px;border:1px solid var(--color-border-tertiary)">• ${i}</div>`).join('')
+  }</div>`;
+  sw.appendChild(wrap);
+}
+
+function buildSections(){
+  const sw=document.getElementById('sections-wrap');
+  data.forEach(ch=>{
+    const sec=document.createElement('div');
+    sec.className=`section band-${ch.band}`;
+    sec.id=ch.id;
+    sec.innerHTML=`
+      <div class="sec-header" onclick="toggle('${ch.id}')">
+        <div>
+          <div class="sec-label">${ch.label}</div>
+          <div style="font-size:11px;color:var(--color-text-secondary);margin-top:2px">${ch.desc} · Sections ${ch.secs}</div>
+        </div>
+        <div class="sec-meta">${ch.cards.length} topics</div>
+        <span class="sec-arrow" id="arr-${ch.id}">▶</span>
+      </div>
+      <div class="sec-body" id="body-${ch.id}">
+        <div class="grid">${ch.cards.map(c=>`<div class="card"><div class="card-title">${c.t}</div><div class="card-body">${c.b}</div></div>`).join('')}</div>
+      </div>`;
+    sw.appendChild(sec);
+  });
+}
+
+function toggle(id){
+  const body=document.getElementById('body-'+id);
+  const arr=document.getElementById('arr-'+id);
+  body.classList.toggle('open');
+  arr.classList.toggle('open');
+}
+
+buildOverview();
+buildToc();
+buildNewProv();
+buildSections();
+
+// open ch12 and ch13 by default (most tested)
+['ch12','ch13','ch20'].forEach(id=>{
+  document.getElementById('body-'+id).classList.add('open');
+  document.getElementById('arr-'+id).classList.add('open');
+});
+</script>
+<div style="text-align:center; margin-bottom:16px;">
+  <a href="https://www.indiacode.nic.in/bitstream/123456789/20062/1/a202345.pdf" target="_blank" download class="floating-download">
+  <i class="fa-solid fa-download"> Download BNS 2023 PDF</i>
+</a>
+</div>
+</body>
+</html>
+
