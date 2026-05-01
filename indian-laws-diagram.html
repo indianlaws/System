@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indian Laws — Complete Study Diagram</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080c16;
+  --surface: #0e1220;
+  --card: #111827;
+  --border: #1c2235;
+  --gold: #d4a843;
+  --gold-light: #f0c860;
+  --gold-dim: rgba(212,168,67,0.12);
+  --text: #e2d9c8;
+  --muted: #6b7280;
+  --dim: #374151;
+
+  --c1: #dc4444; --c1d: rgba(220,68,68,0.1);  /* Criminal */
+  --c2: #3b82f6; --c2d: rgba(59,130,246,0.1);  /* Civil */
+  --c3: #f59e0b; --c3d: rgba(245,158,11,0.1);  /* Constitutional */
+  --c4: #ec4899; --c4d: rgba(236,72,153,0.1);  /* Family */
+  --c5: #10b981; --c5d: rgba(16,185,129,0.1);  /* Environment */
+  --c6: #06b6d4; --c6d: rgba(6,182,212,0.1);   /* Corporate */
+  --c7: #8b5cf6; --c7d: rgba(139,92,246,0.1);  /* IP */
+  --c8: #f97316; --c8d: rgba(249,115,22,0.1);  /* Labour */
+  --c9: #84cc16; --c9d: rgba(132,204,22,0.1);  /* Property */
+  --c10: #06d6d6; --c10d: rgba(6,214,214,0.1); /* IT */
+  --c11: #fb7185; --c11d: rgba(251,113,133,0.1); /* Health */
+  --c12: #a78bfa; --c12d: rgba(167,139,250,0.1); /* Social */
+  --new: #22c55e;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'IBM Plex Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Starfield bg */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(212,168,67,0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(59,130,246,0.04) 0%, transparent 50%),
+    radial-gradient(1px 1px at 15% 25%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 60%, rgba(255,255,255,0.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 15%, rgba(255,255,255,0.25) 0%, transparent 100%),
+    radial-gradient(1px 1px at 80% 45%, rgba(255,255,255,0.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 70%, rgba(255,255,255,0.15) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page { position: relative; z-index: 1; padding: 40px 20px 80px; max-width: 1280px; margin: 0 auto; }
+
+/* ── HEADER ── */
+header { text-align: center; margin-bottom: 56px; }
+.header-emblem {
+  width: 64px; height: 64px;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px;
+  margin: 0 auto 20px;
+  background: var(--gold-dim);
+  box-shadow: 0 0 40px rgba(212,168,67,0.2);
+  animation: pulse 4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 20px rgba(212,168,67,0.2); }
+  50% { box-shadow: 0 0 50px rgba(212,168,67,0.35); }
+}
+header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 5vw, 56px);
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+header h1 span { color: var(--text); }
+.header-rule {
+  display: flex; align-items: center; gap: 16px;
+  margin: 16px auto;
+  max-width: 400px;
+}
+.header-rule div { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+header p { font-size: 12px; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; }
+
+/* ── FILTER TABS ── */
+.filter-bar {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  justify-content: center;
+  margin-bottom: 36px;
+}
+.filter-btn {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: all 0.2s;
+}
+.filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+.filter-btn.active { background: var(--gold-dim); border-color: var(--gold); color: var(--gold-light); }
+
+/* ── ROOT NODE ── */
+.root-wrap { display: flex; flex-direction: column; align-items: center; margin-bottom: 0; }
+.root-node {
+  background: linear-gradient(135deg, #161d30, #0c1020);
+  border: 2px solid var(--gold);
+  border-radius: 20px;
+  padding: 22px 56px;
+  text-align: center;
+  box-shadow: 0 0 60px rgba(212,168,67,0.15), 0 20px 60px rgba(0,0,0,0.5);
+  position: relative;
+  overflow: hidden;
+}
+.root-node::before {
+  content: '';
+  position: absolute;
+  top: -40%; left: -10%;
+  width: 120%; height: 80%;
+  background: radial-gradient(ellipse, rgba(212,168,67,0.06) 0%, transparent 70%);
+}
+.root-node h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  color: var(--gold-light);
+  position: relative;
+}
+.root-node p { font-size: 11px; color: var(--muted); margin-top: 6px; letter-spacing: 0.1em; position: relative; }
+
+.tree-line { width: 2px; height: 36px; background: linear-gradient(to bottom, var(--gold), rgba(212,168,67,0.2)); margin: 0 auto; }
+.h-bar { width: calc(100% - 40px); max-width: 1200px; height: 2px; background: linear-gradient(90deg, transparent, rgba(212,168,67,0.3) 20%, rgba(212,168,67,0.3) 80%, transparent); margin: 0 auto; }
+
+/* ── CATEGORY GRID ── */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 0;
+}
+
+.branch-stub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.stub-line { width: 2px; height: 20px; background: rgba(212,168,67,0.2); }
+
+/* ── CATEGORY CARD ── */
+.cat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+.cat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.6);
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cat-head {
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  cursor: pointer;
+  user-select: none;
+}
+.cat-icon-wrap {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+}
+.cat-info { flex: 1; min-width: 0; }
+.cat-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cat-count { font-size: 10px; color: var(--muted); margin-top: 2px; }
+.cat-toggle { font-size: 16px; color: var(--muted); transition: transform 0.3s; flex-shrink: 0; }
+.cat-card.collapsed .cat-toggle { transform: rotate(-90deg); }
+
+.cat-body {
+  padding: 10px 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 600px;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.35s;
+}
+.cat-card.collapsed .cat-body {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* ── LAW ITEM ── */
+.law {
+  background: rgba(0,0,0,0.25);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 8px;
+  padding: 8px 10px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.law:hover { background: rgba(255,255,255,0.04); }
+
+.law-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+.law-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+  flex: 1;
+}
+.law-sub {
+  font-size: 10.5px;
+  color: var(--muted);
+  margin-top: 3px;
+  line-height: 1.4;
+}
+.law-year {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 1px 5px;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.badge {
+  font-size: 8.5px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 100px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: 0.04em;
+}
+.b-new { background: rgba(34,197,94,0.15); color: var(--new); border: 1px solid rgba(34,197,94,0.3); }
+.b-core { background: rgba(212,168,67,0.15); color: var(--gold); border: 1px solid rgba(212,168,67,0.3); }
+.b-key { background: rgba(59,130,246,0.15); color: #93c5fd; border: 1px solid rgba(59,130,246,0.3); }
+.b-rep { background: rgba(220,68,68,0.12); color: #fca5a5; border: 1px solid rgba(220,68,68,0.3); }
+
+/* ── SPOTLIGHT ── */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  color: var(--gold-light);
+  text-align: center;
+  margin-bottom: 6px;
+}
+.section-sub {
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.divider {
+  display: flex; align-items: center; gap: 14px;
+  margin: 48px 0 32px;
+}
+.divider div { flex: 1; height: 1px; background: var(--border); }
+.divider span { color: var(--gold); font-size: 14px; }
+
+/* ── SPOTLIGHT CARDS ── */
+.sp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+  margin-bottom: 0;
+}
+.sp-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+  position: relative;
+  overflow: hidden;
+}
+.sp-card::after {
+  content: attr(data-label);
+  position: absolute;
+  top: 18px; right: -26px;
+  background: var(--accent-color);
+  color: #000;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 3px 36px;
+  transform: rotate(45deg);
+  transform-origin: center;
+  opacity: 0.9;
+}
+.sp-stripe {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.sp-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 4px 10px;
+  border-radius: 100px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.sp-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 21px;
+  color: var(--text);
+  margin-bottom: 4px;
+  line-height: 1.2;
+}
+.sp-replaces {
+  font-size: 11px;
+  color: var(--muted);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sp-arrow { color: var(--gold); }
+
+.sp-points { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.sp-points li {
+  font-size: 11.5px;
+  color: var(--text);
+  padding-left: 18px;
+  position: relative;
+  line-height: 1.55;
+  opacity: 0.88;
+}
+.sp-points li::before {
+  content: '▹';
+  position: absolute;
+  left: 0;
+  color: var(--accent-color, var(--gold));
+  font-size: 14px;
+  line-height: 1.3;
+}
+.enacted {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 10px;
+  color: var(--new);
+  background: rgba(34,197,94,0.08);
+  border: 1px solid rgba(34,197,94,0.25);
+  border-radius: 6px;
+  padding: 4px 12px;
+  letter-spacing: 0.04em;
+}
+
+/* ── COMPARISON TABLE ── */
+.comp-table {
+  width: 100%;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+.comp-table table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.comp-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  font-size: 11px;
+  background: rgba(212,168,67,0.07);
+  border-bottom: 1px solid rgba(212,168,67,0.2);
+}
+.comp-table td { padding: 10px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.comp-table tr:last-child td { border-bottom: none; }
+.comp-table tr:nth-child(even) td { background: rgba(255,255,255,0.015); }
+.old-val { color: #fca5a5; }
+.new-val { color: var(--new); font-weight: 500; }
+
+/* ── STUDY FLOW ── */
+.flow-wrap {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.flow-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), #ec4899, #8b5cf6, transparent);
+}
+.flow-wrap h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  color: var(--gold-light);
+  margin-bottom: 20px;
+}
+.flow-steps { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; }
+.flow-step {
+  flex: 1;
+  min-width: 130px;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 12px;
+  text-align: center;
+  position: relative;
+}
+.step-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  color: rgba(212,168,67,0.15);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.step-label { font-size: 12px; font-weight: 600; color: var(--text); }
+.step-detail { font-size: 10px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+.flow-arrow { display: flex; align-items: center; color: var(--gold); font-size: 20px; opacity: 0.35; }
+
+footer {
+  text-align: center;
+  margin-top: 56px;
+  font-size: 11px;
+  color: var(--dim);
+  letter-spacing: 0.1em;
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+}
+
+@media (max-width: 700px) {
+  .cat-grid { grid-template-columns: 1fr; }
+  .sp-grid { grid-template-columns: 1fr; }
+  .flow-arrow { display: none; }
+  .flow-step { min-width: 120px; }
+  .h-bar { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<header>
+  <div class="header-emblem">⚖</div>
+  <h1>Indian Legal System<br><span>Complete Study Diagram</span></h1>
+  <div class="header-rule"><div></div><span style="color:var(--gold);font-size:12px;">✦</span><div></div></div>
+  <p>All Major Laws · BNS · BNSS · BSA · Constitutional · Civil · Criminal · Special</p>
+</header>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterCards('all')">All Laws</button>
+  <button class="filter-btn" onclick="filterCards('criminal')" style="--fc:var(--c1)">Criminal</button>
+  <button class="filter-btn" onclick="filterCards('civil')" style="--fc:var(--c2)">Civil</button>
+  <button class="filter-btn" onclick="filterCards('constitutional')" style="--fc:var(--c3)">Constitutional</button>
+  <button class="filter-btn" onclick="filterCards('family')" style="--fc:var(--c4)">Family</button>
+  <button class="filter-btn" onclick="filterCards('environment')" style="--fc:var(--c5)">Environment</button>
+  <button class="filter-btn" onclick="filterCards('corporate')" style="--fc:var(--c6)">Corporate</button>
+  <button class="filter-btn" onclick="filterCards('ip')" style="--fc:var(--c7)">IP Laws</button>
+  <button class="filter-btn" onclick="filterCards('labour')" style="--fc:var(--c8)">Labour</button>
+  <button class="filter-btn" onclick="filterCards('property')" style="--fc:var(--c9)">Property</button>
+  <button class="filter-btn" onclick="filterCards('it')" style="--fc:var(--c10)">IT & Data</button>
+  <button class="filter-btn" onclick="filterCards('health')" style="--fc:var(--c11)">Health</button>
+  <button class="filter-btn" onclick="filterCards('social')" style="--fc:var(--c12)">Social Justice</button>
+</div>
+
+<!-- ROOT NODE -->
+<div class="root-wrap">
+  <div class="root-node">
+    <h2>⚖ Constitution of India, 1950</h2>
+    <p>Supreme Law · 395 Articles · 12 Schedules · 25 Parts · 106 Amendments (as of 2024)</p>
+  </div>
+  <div class="tree-line"></div>
+  <div class="h-bar"></div>
+</div>
+
+<!-- CATEGORY GRID -->
+<div class="cat-grid" id="catGrid">
+
+  <!-- 1. CRIMINAL LAW -->
+  <div class="cat-card" data-cat="criminal" style="animation-delay:0.05s;">
+    <div class="cat-head" onclick="toggleCard(this)">
+      <div class="cat-icon-wrap" style="background:var(--c1d);">⚔️</div>
+      <div class="cat-info">
+        <div class="cat-name" style="color:var(--c1);">Criminal Laws</div>
+        <div class="cat-count">9 Laws</div>
+      </div>
+      <span class="cat-toggle">▾</span>
+    </div>
+    <div class="cat-body">
+      <div class="law">
+        <a href="https://www.indiacode.nic.in/bitstream/123456789/20062/1/a202345.pdf" style="text-decoration: none;">
+        <div class="law-top"><span class="law-name">Bharatiya Nyaya Sanhita (BNS)</span><span class="badge b-new">NEW</span><span class="law-year">2023</span></div>
+        <div class="law-sub">Replaced IPC 1860 · 358 Sections · Terrorism, Mob lynching, Community service</div>
+        </a>
+        </div>
+      <div class="law">
+        <a href="#" style="text-decoration: none;">
+        <div class="law-top"><span class="law-name">Bharatiya Nagarik Suraksha Sanhita (BNSS)</span><span class="badge b-new">NEW</span><span class="law-year">2023</span></div>
+        <div class="law-sub">Replaced CrPC 1973 · 531 Sections · Zero FIR, Forensics, Victim Rights</div>
+        </a>
+        </div>
+      <div class="law">
+        <a href="#" style="text-decoration: none;">
+        <div class="law-top"><span class="law-name">Bharatiya Sakshya Adhiniyam (BSA)</span><span class="badge b-new">NEW</span><span class="law-year">2023</span></div>
+        <div class="law-sub">Replaced Evidence Act 1872 · 170 Sections · Digital Evidence, Electronic Records</div>
+        </a>
+        </div>
+      <div class="law">
+        <a href="#" style="text-decoration: none;">
+        <div class="law-top"><span class="law-name">Indian Penal Code (IPC)</span><span class="badge b-rep">REPEALED</span><span class="law-year">1860</span></div>
+        <div class="law-sub">511 Sections · Reference still needed for pre-July 2024 cases</div>
+        </a>
+      </div>
+      <div class="law">
+        <a href="#" style="text-decoration: none;">
+        <div class="law-top"><span class="law-name">Code of Criminal Procedure (CrPC)</span><span class="badge b-rep">REPEALED</span><span class="law-year">1973</span></div>
+        <div class="law-sub">484 Sections · Governs pre-July 2024 criminal proceedings</div>
+        </a>
+        </div>
+      <div class="law">
+        <a href="#" style="text-decoration: none;">
+        <div class="law-top"><span class="law-name">POCSO Act</span><span class="law-year">2012</span></div>
+        <div class="law-sub">Protection of Children from Sexual Offences · Special courts</div>
+        </a>
+        </div>
+      <div class="law">
+        <a href="#" style="text-decoration: none;">
+        <div class="law-top"><span class="law-name">NDPS Act</span><span class="law-year">1985</span></div>
+        <div class="law-sub">Narcotic Drugs & Psychotropic Substances · Stringent bail provisions</div>
+        </a>
+        </div>
+      <div class="law">
+        <a href="#" style="text-decoration: none;">
+        <div class="law-top"><span class="law-name">Unlawful Activities Prevention Act (UAPA)</span><span class="law-year">1967</span></div>
+        <div class="law-sub">Anti-terrorism · Amended 2004, 2008, 2012, 2019</div> 
+        </a>
+      </div>
+      <div class="law">
+        <a href="#" style="text-decoration: none;">
+        <div class="law-top"><span class="law-name">Arms Act</span><span class="law-year">1959</span></div>
+        <div class="law-sub">Regulation of arms & ammunition · Amended 2019</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. CIVIL & PROCEDURAL -->
+  <div class="cat-card" data-cat="civil" style="animation-delay:0.1s;">
+    <div class="cat-head" onclick="toggleCard(this)">
+      <div class="cat-icon-wrap" style="background:var(--c2d);">📜</div>
+      <div class="cat-info">
+        <div class="cat-name" style="color:var(--c2);">Civil & Procedural Laws</div>
+        <div class="cat-count">9 Laws</div>
+      </div>
+      <span class="cat-toggle">▾</span>
+    </div>
+    <div class="cat-body">
+      <div class="law">
+        <a href="#" style="text-decoration: none;">
+        <div class="law-top"><span class="law-name">Code of Civil Procedure (CPC)</span><span class="badge b-core">CORE</span><span class="law-year">1908</span></div>
+        <div class="law-sub">Civil court jurisdiction, pleadings, execution, appeals</div>
+        </a>
+      </div>
+      <div class="law">
+        <a href="#" style="text-decoration: none;">
+        <div class="law-top"><span class="law-name">Indian Contract Act</span><span class="badge b-core">CORE</span><span class="law-year">1872</span></div>
+        <div class="law-sub">Offer, acceptance, consideration, breach, quasi-contracts</div>
+        </a>
+      </div>
+      <div class="law">
+        <a href="#" style="text-decoration: none;">
+        <div class="law-top"><span class="law-name">Specific Relief Act</span><span class="law-year">1963</span></div>
+        <div class="law-sub">Specific performance of contracts · Injunctions · 2018 Amendment</div>
+        </a>
+        </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Limitation Act</span><span class="law-year">1963</span></div>
+        <div class="law-sub">Time limits for filing suits, appeals & applications</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Negotiable Instruments Act</span><span class="law-year">1881</span></div>
+        <div class="law-sub">Cheques, promissory notes, bills of exchange · Sec 138 dishonour</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Arbitration & Conciliation Act</span><span class="law-year">1996</span></div>
+        <div class="law-sub">ADR mechanism · Based on UNCITRAL Model Law · 2019 Amendment</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Sale of Goods Act</span><span class="law-year">1930</span></div>
+        <div class="law-sub">Contract for sale of movable property · Conditions & warranties</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Indian Partnership Act</span><span class="law-year">1932</span></div>
+        <div class="law-sub">Formation & dissolution of partnerships · Rights of partners</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Mediation Act</span><span class="badge b-new">NEW</span><span class="law-year">2023</span></div>
+        <div class="law-sub">Statutory framework for mediation · Pre-litigation mediation</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. CONSTITUTIONAL -->
+  <div class="cat-card" data-cat="constitutional" style="animation-delay:0.15s;">
+    <div class="cat-head" onclick="toggleCard(this)">
+      <div class="cat-icon-wrap" style="background:var(--c3d);">🏛️</div>
+      <div class="cat-info">
+        <div class="cat-name" style="color:var(--c3);">Constitutional Law</div>
+        <div class="cat-count">8 Provisions / Acts</div>
+      </div>
+      <span class="cat-toggle">▾</span>
+    </div>
+    <div class="cat-body">
+      <div class="law">
+        <div class="law-top"><span class="law-name">Fundamental Rights</span><span class="badge b-core">CORE</span></div>
+        <div class="law-sub">Art. 12–35 · Part III · Right to Equality, Freedom, Life & Liberty, Religion, Education</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Directive Principles of State Policy (DPSP)</span></div>
+        <div class="law-sub">Art. 36–51 · Part IV · Non-justiciable but binding on State policy</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Fundamental Duties</span></div>
+        <div class="law-sub">Art. 51A · Part IV-A · 11 Duties added by 42nd & 86th Amendments</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Writ Jurisdiction</span></div>
+        <div class="law-sub">Art. 32 (SC) & Art. 226 (HC) · Habeas Corpus, Mandamus, Certiorari, Quo Warranto, Prohibition</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Emergency Provisions</span></div>
+        <div class="law-sub">Art. 352 (National) · Art. 356 (State) · Art. 360 (Financial Emergency)</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">7th Schedule — Three Lists</span></div>
+        <div class="law-sub">List I (Union) · List II (State) · List III (Concurrent) · Distribution of legislative powers</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Representation of People Act</span><span class="law-year">1951</span></div>
+        <div class="law-sub">Elections, qualifications, disqualifications of MPs & MLAs</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Lokpal & Lokayuktas Act</span><span class="law-year">2013</span></div>
+        <div class="law-sub">Ombudsman for public officials · Investigation of corruption</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. FAMILY & PERSONAL LAWS -->
+  <div class="cat-card" data-cat="family" style="animation-delay:0.2s;">
+    <div class="cat-head" onclick="toggleCard(this)">
+      <div class="cat-icon-wrap" style="background:var(--c4d);">👨‍👩‍👧</div>
+      <div class="cat-info">
+        <div class="cat-name" style="color:var(--c4);">Family & Personal Laws</div>
+        <div class="cat-count">13 Laws</div>
+      </div>
+      <span class="cat-toggle">▾</span>
+    </div>
+    <div class="cat-body">
+      <div class="law">
+        <div class="law-top"><span class="law-name">Hindu Marriage Act</span><span class="law-year">1955</span></div>
+        <div class="law-sub">Marriage, divorce, judicial separation · Hindu, Sikh, Jain, Buddhist</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Hindu Succession Act</span><span class="law-year">1956</span></div>
+        <div class="law-sub">Intestate succession · 2005 Amendment: Equal rights to daughters in coparcenary</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Hindu Minority & Guardianship Act</span><span class="law-year">1956</span></div>
+        <div class="law-sub">Natural & testamentary guardianship of minors</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Hindu Adoption & Maintenance Act</span><span class="law-year">1956</span></div>
+        <div class="law-sub">Adoption rules & maintenance obligations</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Muslim Personal Law (Shariat) Application Act</span><span class="law-year">1937</span></div>
+        <div class="law-sub">Marriage, dissolution, maintenance, succession under Shariat</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Muslim Women (Protection) Act</span><span class="law-year">2019</span></div>
+        <div class="law-sub">Criminalises Triple Talaq (instant divorce) — landmark reform</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Special Marriage Act</span><span class="law-year">1954</span></div>
+        <div class="law-sub">Interfaith / inter-community civil marriage · Secular law</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Indian Divorce Act</span><span class="law-year">1869</span></div>
+        <div class="law-sub">Divorce & matrimonial causes for Christians</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Parsi Marriage & Divorce Act</span><span class="law-year">1936</span></div>
+        <div class="law-sub">Marriage and divorce for Parsi community</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Guardians & Wards Act</span><span class="law-year">1890</span></div>
+        <div class="law-sub">Court appointment of guardian · Welfare of minor</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Dowry Prohibition Act</span><span class="law-year">1961</span></div>
+        <div class="law-sub">Prohibition of giving/taking dowry · Cruelty (Sec 498A IPC / BNS)</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Protection of Women from Domestic Violence Act</span><span class="law-year">2005</span></div>
+        <div class="law-sub">Civil remedies · Protection, residence & monetary orders</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Maintenance & Welfare of Parents & Senior Citizens Act</span><span class="law-year">2007</span></div>
+        <div class="law-sub">Mandatory maintenance by children · Tribunals</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. ENVIRONMENT -->
+  <div class="cat-card" data-cat="environment" style="animation-delay:0.25s;">
+    <div class="cat-head" onclick="toggleCard(this)">
+      <div class="cat-icon-wrap" style="background:var(--c5d);">🌿</div>
+      <div class="cat-info">
+        <div class="cat-name" style="color:var(--c5);">Environmental Laws</div>
+        <div class="cat-count">8 Laws</div>
+      </div>
+      <span class="cat-toggle">▾</span>
+    </div>
+    <div class="cat-body">
+      <div class="law">
+        <div class="law-top"><span class="law-name">Environment Protection Act</span><span class="badge b-core">CORE</span><span class="law-year">1986</span></div>
+        <div class="law-sub">Umbrella legislation · Powers of Central Government to protect environment</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Wildlife Protection Act</span><span class="law-year">1972</span></div>
+        <div class="law-sub">Protection of wild animals & plants · Schedules I–VI · Amended 2022</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Forest Conservation Act</span><span class="law-year">1980</span></div>
+        <div class="law-sub">Diversion of forest land requires central approval</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Water (Prevention & Control of Pollution) Act</span><span class="law-year">1974</span></div>
+        <div class="law-sub">Establishment of PCBs · Water pollution control</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Air (Prevention & Control of Pollution) Act</span><span class="law-year">1981</span></div>
+        <div class="law-sub">CPCB & SPCBs · Emission standards</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">National Green Tribunal Act</span><span class="law-year">2010</span></div>
+        <div class="law-sub">Specialised tribunal for environmental disputes</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Biological Diversity Act</span><span class="law-year">2002</span></div>
+        <div class="law-sub">Conservation of biodiversity · Access & benefit sharing</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Public Liability Insurance Act</span><span class="law-year">1991</span></div>
+        <div class="law-sub">Mandatory insurance for hazardous industries · No-fault liability</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. CORPORATE / TAX / FINANCE -->
+  <div class="cat-card" data-cat="corporate" style="animation-delay:0.3s;">
+    <div class="cat-head" onclick="toggleCard(this)">
+      <div class="cat-icon-wrap" style="background:var(--c6d);">🏦</div>
+      <div class="cat-info">
+        <div class="cat-name" style="color:var(--c6);">Corporate, Tax & Finance</div>
+        <div class="cat-count">12 Laws</div>
+      </div>
+      <span class="cat-toggle">▾</span>
+    </div>
+    <div class="cat-body">
+      <div class="law">
+        <div class="law-top"><span class="law-name">Companies Act</span><span class="badge b-core">CORE</span><span class="law-year">2013</span></div>
+        <div class="law-sub">Incorporation, directors, auditors, NCLT, CSR obligations</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Insolvency & Bankruptcy Code (IBC)</span><span class="law-year">2016</span></div>
+        <div class="law-sub">Resolution & liquidation · NCLT/NCLAT · IRP, RP, Liquidator</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">SEBI Act</span><span class="law-year">1992</span></div>
+        <div class="law-sub">Securities market regulator · Investor protection · SEBI Regulations</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">RBI Act</span><span class="law-year">1934</span></div>
+        <div class="law-sub">Reserve Bank of India · Monetary policy, currency issue, banking regulation</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Banking Regulation Act</span><span class="law-year">1949</span></div>
+        <div class="law-sub">Licensing & regulation of banks · RBI powers over banks</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">FEMA (Foreign Exchange Management Act)</span><span class="law-year">1999</span></div>
+        <div class="law-sub">Replaced FERA · Regulates forex transactions · ED enforcement</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Prevention of Money Laundering Act (PMLA)</span><span class="law-year">2002</span></div>
+        <div class="law-sub">Anti-money laundering · Attachment of proceeds of crime</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">SARFAESI Act</span><span class="law-year">2002</span></div>
+        <div class="law-sub">Banks can recover secured assets without court · NPA resolution</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Competition Act</span><span class="law-year">2002</span></div>
+        <div class="law-sub">CCI · Anti-competitive agreements · Abuse of dominance · Mergers</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Income Tax Act</span><span class="law-year">1961</span></div>
+        <div class="law-sub">Direct tax on income of individuals & corporates · ITR, TDS, exemptions</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">CGST / IGST Acts (GST)</span><span class="law-year">2017</span></div>
+        <div class="law-sub">Goods & Services Tax · Dual GST structure · GST Council</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Benami Transactions (Prohibition) Act</span><span class="law-year">1988</span></div>
+        <div class="law-sub">Prohibits benami property · 2016 Amendment strengthened enforcement</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. INTELLECTUAL PROPERTY -->
+  <div class="cat-card" data-cat="ip" style="animation-delay:0.35s;">
+    <div class="cat-head" onclick="toggleCard(this)">
+      <div class="cat-icon-wrap" style="background:var(--c7d);">💡</div>
+      <div class="cat-info">
+        <div class="cat-name" style="color:var(--c7);">Intellectual Property Laws</div>
+        <div class="cat-count">7 Laws</div>
+      </div>
+      <span class="cat-toggle">▾</span>
+    </div>
+    <div class="cat-body">
+      <div class="law">
+        <div class="law-top"><span class="law-name">Patents Act</span><span class="law-year">1970</span></div>
+        <div class="law-sub">Product & process patents · 20-year protection · TRIPS compliant (2005 amendment)</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Copyright Act</span><span class="law-year">1957</span></div>
+        <div class="law-sub">Literary, artistic, musical, dramatic works · Author's lifetime + 60 years</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Trade Marks Act</span><span class="law-year">1999</span></div>
+        <div class="law-sub">Registration & protection of trademarks · Well-known marks</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Designs Act</span><span class="law-year">2000</span></div>
+        <div class="law-sub">Protection of industrial designs · 10 + 5 year registration</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Geographical Indications of Goods Act</span><span class="law-year">1999</span></div>
+        <div class="law-sub">GI tags — Darjeeling Tea, Basmati Rice, Kanchipuram Silk</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Protection of Plant Varieties & Farmers' Rights Act</span><span class="law-year">2001</span></div>
+        <div class="law-sub">Rights of plant breeders & farmers · PPV&FRA</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Semiconductor Integrated Circuits Layout-Design Act</span><span class="law-year">2000</span></div>
+        <div class="law-sub">Protection of layout designs of semiconductor circuits</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. LABOUR & EMPLOYMENT -->
+  <div class="cat-card" data-cat="labour" style="animation-delay:0.4s;">
+    <div class="cat-head" onclick="toggleCard(this)">
+      <div class="cat-icon-wrap" style="background:var(--c8d);">👷</div>
+      <div class="cat-info">
+        <div class="cat-name" style="color:var(--c8);">Labour & Employment Laws</div>
+        <div class="cat-count">10 Laws</div>
+      </div>
+      <span class="cat-toggle">▾</span>
+    </div>
+    <div class="cat-body">
+      <div class="law">
+        <div class="law-top"><span class="law-name">Code on Wages</span><span class="badge b-new">NEW</span><span class="law-year">2019</span></div>
+        <div class="law-sub">Consolidates 4 wage laws · Minimum Wage, Payment of Wages, Equal Remuneration, Bonus</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Industrial Relations Code</span><span class="badge b-new">NEW</span><span class="law-year">2020</span></div>
+        <div class="law-sub">Trade Unions, Industrial Disputes, Standing Orders — consolidated</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Code on Social Security</span><span class="badge b-new">NEW</span><span class="law-year">2020</span></div>
+        <div class="law-sub">EPF, ESI, Gratuity, Maternity Benefit — 9 laws consolidated</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Occupational Safety, Health & Working Conditions Code</span><span class="badge b-new">NEW</span><span class="law-year">2020</span></div>
+        <div class="law-sub">13 laws consolidated including Factories Act provisions</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Factories Act</span><span class="law-year">1948</span></div>
+        <div class="law-sub">Safety, health, welfare in factories · Hours of work · Still in reference use</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">POSH Act (Sexual Harassment at Workplace)</span><span class="law-year">2013</span></div>
+        <div class="law-sub">Internal Complaints Committee · Vishaka Guidelines codified</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Contract Labour (Regulation & Abolition) Act</span><span class="law-year">1970</span></div>
+        <div class="law-sub">Regulates employment of contract workers</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Child & Adolescent Labour (Prohibition) Act</span><span class="law-year">1986</span></div>
+        <div class="law-sub">Prohibits employment of children below 14 · Amended 2016</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Bonded Labour System (Abolition) Act</span><span class="law-year">1976</span></div>
+        <div class="law-sub">Abolishes bonded labour · Rehabilitation of freed labourers</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Equal Remuneration Act</span><span class="law-year">1976</span></div>
+        <div class="law-sub">Equal pay for men and women for same work (now under Code on Wages)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. PROPERTY & LAND -->
+  <div class="cat-card" data-cat="property" style="animation-delay:0.45s;">
+    <div class="cat-head" onclick="toggleCard(this)">
+      <div class="cat-icon-wrap" style="background:var(--c9d);">🏠</div>
+      <div class="cat-info">
+        <div class="cat-name" style="color:var(--c9);">Property & Land Laws</div>
+        <div class="cat-count">8 Laws</div>
+      </div>
+      <span class="cat-toggle">▾</span>
+    </div>
+    <div class="cat-body">
+      <div class="law">
+        <div class="law-top"><span class="law-name">Transfer of Property Act</span><span class="badge b-core">CORE</span><span class="law-year">1882</span></div>
+        <div class="law-sub">Sale, mortgage, lease, exchange, gift, actionable claims</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Registration Act</span><span class="law-year">1908</span></div>
+        <div class="law-sub">Compulsory & optional registration of documents</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Indian Stamp Act</span><span class="law-year">1899</span></div>
+        <div class="law-sub">Stamp duty on instruments · Admissibility of unstamped documents</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">RFCTLARR Act (Land Acquisition)</span><span class="law-year">2013</span></div>
+        <div class="law-sub">Right to Fair Compensation & Resettlement · Replaced 1894 Act</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Indian Easements Act</span><span class="law-year">1882</span></div>
+        <div class="law-sub">Easements, licences, profits à prendre in property law</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Real Estate (Regulation & Development) Act — RERA</span><span class="law-year">2016</span></div>
+        <div class="law-sub">Regulates real estate sector · RERA Authority · Homebuyer protection</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Urban Land (Ceiling & Regulation) Act</span><span class="law-year">1976</span></div>
+        <div class="law-sub">Ceiling on urban land holdings (repealed in most states)</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Ancient Monuments & Archaeological Sites Act</span><span class="law-year">1958</span></div>
+        <div class="law-sub">Protection of national monuments · ASI · Amended 2010</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10. IT & DATA -->
+  <div class="cat-card" data-cat="it" style="animation-delay:0.5s;">
+    <div class="cat-head" onclick="toggleCard(this)">
+      <div class="cat-icon-wrap" style="background:var(--c10d);">💻</div>
+      <div class="cat-info">
+        <div class="cat-name" style="color:var(--c10);">IT, Data & Technology Laws</div>
+        <div class="cat-count">5 Laws</div>
+      </div>
+      <span class="cat-toggle">▾</span>
+    </div>
+    <div class="cat-body">
+      <div class="law">
+        <div class="law-top"><span class="law-name">Information Technology Act</span><span class="badge b-core">CORE</span><span class="law-year">2000</span></div>
+        <div class="law-sub">Cyber crimes, digital signatures, e-commerce, intermediary liability</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Digital Personal Data Protection (DPDP) Act</span><span class="badge b-new">NEW</span><span class="law-year">2023</span></div>
+        <div class="law-sub">Personal data protection · Data Fiduciaries · Data Principal rights</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Aadhaar Act</span><span class="law-year">2016</span></div>
+        <div class="law-sub">Biometric identity system · UIDAI · Authentication framework</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Telecom Act</span><span class="badge b-new">NEW</span><span class="law-year">2023</span></div>
+        <div class="law-sub">Replaced Indian Telegraph Act 1885 · Spectrum, licensing, regulation</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">IT (Intermediary Guidelines & Digital Media Ethics Code) Rules</span><span class="law-year">2021</span></div>
+        <div class="law-sub">Regulation of social media intermediaries & OTT platforms</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11. HEALTH & MEDICAL -->
+  <div class="cat-card" data-cat="health" style="animation-delay:0.55s;">
+    <div class="cat-head" onclick="toggleCard(this)">
+      <div class="cat-icon-wrap" style="background:var(--c11d);">⚕️</div>
+      <div class="cat-info">
+        <div class="cat-name" style="color:var(--c11);">Health & Medical Laws</div>
+        <div class="cat-count">7 Laws</div>
+      </div>
+      <span class="cat-toggle">▾</span>
+    </div>
+    <div class="cat-body">
+      <div class="law">
+        <div class="law-top"><span class="law-name">Drugs & Cosmetics Act</span><span class="law-year">1940</span></div>
+        <div class="law-sub">Regulation of import, manufacture & distribution of drugs · CDSCO</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Mental Healthcare Act</span><span class="law-year">2017</span></div>
+        <div class="law-sub">Rights of persons with mental illness · Advance directive · MHRBs</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Transplantation of Human Organs Act</span><span class="law-year">1994</span></div>
+        <div class="law-sub">Regulation of organ donation & transplantation · Brain death definition</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">National Medical Commission Act</span><span class="law-year">2019</span></div>
+        <div class="law-sub">Replaced Medical Council of India · Regulates medical education</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Epidemic Diseases Act</span><span class="law-year">1897</span></div>
+        <div class="law-sub">Powers to prevent spread of dangerous epidemics · Used in COVID-19</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">MTP Act (Medical Termination of Pregnancy)</span><span class="law-year">1971</span></div>
+        <div class="law-sub">Abortion law · 2021 Amendment extends limit to 24 weeks in special cases</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">PCPNDT Act (Pre-Conception & Pre-Natal Diagnostic Techniques)</span><span class="law-year">1994</span></div>
+        <div class="law-sub">Prohibits sex determination · Regulation of ultrasound clinics</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 12. SOCIAL JUSTICE -->
+  <div class="cat-card" data-cat="social" style="animation-delay:0.6s;">
+    <div class="cat-head" onclick="toggleCard(this)">
+      <div class="cat-icon-wrap" style="background:var(--c12d);">🤝</div>
+      <div class="cat-info">
+        <div class="cat-name" style="color:var(--c12);">Social Justice & Human Rights</div>
+        <div class="cat-count">9 Laws</div>
+      </div>
+      <span class="cat-toggle">▾</span>
+    </div>
+    <div class="cat-body">
+      <div class="law">
+        <div class="law-top"><span class="law-name">SC/ST Prevention of Atrocities Act</span><span class="badge b-key">KEY</span><span class="law-year">1989</span></div>
+        <div class="law-sub">Special courts, stringent punishment for atrocities on SC/ST communities</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Right to Information (RTI) Act</span><span class="badge b-key">KEY</span><span class="law-year">2005</span></div>
+        <div class="law-sub">Right to information from public authorities · CIC & SICs</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Right to Education (RTE) Act</span><span class="law-year">2009</span></div>
+        <div class="law-sub">Free & compulsory education for children 6–14 years · Art. 21A</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Rights of Persons with Disabilities (RPWD) Act</span><span class="law-year">2016</span></div>
+        <div class="law-sub">Recognizes 21 types of disabilities · 5% reservation · Replaced 1995 Act</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Consumer Protection Act</span><span class="law-year">2019</span></div>
+        <div class="law-sub">NCDRC, State & District commissions · E-commerce consumers included</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Prevention of Corruption Act</span><span class="law-year">1988</span></div>
+        <div class="law-sub">Anti-corruption for public servants · CBI & State ACB investigation</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">National Human Rights Commission Act</span><span class="law-year">1993</span></div>
+        <div class="law-sub">Protection of Human Rights Act · NHRC & SHRCs</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">Juvenile Justice (Care & Protection) Act</span><span class="law-year">2015</span></div>
+        <div class="law-sub">JJBs, Child Welfare Committees · Adoption under CARA</div>
+      </div>
+      <div class="law">
+        <div class="law-top"><span class="law-name">National Food Security Act</span><span class="law-year">2013</span></div>
+        <div class="law-sub">Legal entitlement to subsidised food · PDS, ICDS, MDM coverage</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end cat-grid -->
+
+<!-- DIVIDER -->
+<div class="divider"><div></div><span>✦</span><div></div></div>
+
+<!-- SPOTLIGHT -->
+<div class="section-title">Criminal Law Reforms 2023</div>
+<div class="section-sub">BNS · BNSS · BSA — India's new criminal justice trilogy · Effective 1 July 2024</div>
+
+<div class="sp-grid">
+
+  <!-- BNS -->
+  <div class="sp-card sp-bns" style="--accent-color:var(--c1);">
+    <div class="sp-stripe" style="background:linear-gradient(90deg,var(--c1),var(--gold));"></div>
+    <div class="sp-tag" style="background:var(--c1d);color:#fca5a5;border:1px solid rgba(220,68,68,0.3);">🔴 BNS 2023</div>
+    <div class="sp-title">Bharatiya Nyaya Sanhita</div>
+    <div class="sp-replaces">Replaces <strong style="color:#fca5a5;">IPC 1860</strong> <span class="sp-arrow">→</span> 358 Sections (was 511)</div>
+    <ul class="sp-points" style="--accent-color:var(--c1);">
+      <li>Terrorism explicitly defined as a separate offence for the first time in a penal code</li>
+      <li>Organised Crime (gang crimes, syndicate offences) codified comprehensively</li>
+      <li>Trial in absentia allowed — accused who flees can be convicted</li>
+      <li>Mob Lynching (group of 5+) made a distinct offence with death penalty</li>
+      <li>Snatching defined separately from theft — recognises the force element</li>
+      <li>Community Service introduced as a form of punishment for minor offences</li>
+      <li>Sedition (Sec 124A) removed — replaced with "acts endangering sovereignty"</li>
+      <li>Offences against women and children extensively updated and consolidated</li>
+    </ul>
+    <span class="enacted">✔ In Force: 1 July 2024</span>
+  </div>
+
+  <!-- BNSS -->
+  <div class="sp-card sp-bnss" style="--accent-color:var(--c5);">
+    <div class="sp-stripe" style="background:linear-gradient(90deg,var(--c5),var(--gold));"></div>
+    <div class="sp-tag" style="background:var(--c5d);color:#6ee7b7;border:1px solid rgba(16,185,129,0.3);">🟢 BNSS 2023</div>
+    <div class="sp-title">Bharatiya Nagarik Suraksha Sanhita</div>
+    <div class="sp-replaces">Replaces <strong style="color:#6ee7b7;">CrPC 1973</strong> <span class="sp-arrow">→</span> 531 Sections (was 484)</div>
+    <ul class="sp-points" style="--accent-color:var(--c5);">
+      <li>Zero FIR: Register FIR at any police station, irrespective of jurisdiction</li>
+      <li>Mandatory notification to family/friend within 90 days of arrest</li>
+      <li>Electronic summons, warrants and proceedings now statutorily recognized</li>
+      <li>Forensic investigation mandatory for offences carrying 7+ year sentences</li>
+      <li>Victim must be heard before the State withdraws a case</li>
+      <li>Judgment must be delivered within 45 days of arguments closing</li>
+      <li>Witness protection scheme mandated through State Governments</li>
+      <li>Trial-in-absentia for proclaimed offenders with due procedural safeguards</li>
+    </ul>
+    <span class="enacted">✔ In Force: 1 July 2024</span>
+  </div>
+
+  <!-- BSA -->
+  <div class="sp-card sp-bsa" style="--accent-color:var(--c2);">
+    <div class="sp-stripe" style="background:linear-gradient(90deg,var(--c2),var(--gold));"></div>
+    <div class="sp-tag" style="background:var(--c2d);color:#93c5fd;border:1px solid rgba(59,130,246,0.3);">🔵 BSA 2023</div>
+    <div class="sp-title">Bharatiya Sakshya Adhiniyam</div>
+    <div class="sp-replaces">Replaces <strong style="color:#93c5fd;">Evidence Act 1872</strong> <span class="sp-arrow">→</span> 170 Sections (was 167)</div>
+    <ul class="sp-points" style="--accent-color:var(--c2);">
+      <li>Electronic records (emails, texts, social media) admitted as primary evidence</li>
+      <li>Electronic/Digital Certificate under Sec 63 streamlines digital proof</li>
+      <li>Audio-video recordings of confessions and statements admissible</li>
+      <li>Joint trials across different jurisdictions explicitly codified</li>
+      <li>Secondary evidence provisions rationalised and expanded</li>
+      <li>Expert evidence (DNA, forensic reports) given clearer statutory footing</li>
+      <li>Removes colonial-era evidentiary assumptions, modernises the framework</li>
+    </ul>
+    <span class="enacted">✔ In Force: 1 July 2024</span>
+  </div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<div class="divider"><div></div><span>✦</span><div></div></div>
+<div class="section-title" style="font-size:20px;margin-bottom:16px;">Old vs New — Criminal Law Comparison</div>
+
+<div class="comp-table">
+  <table>
+    <thead>
+      <tr>
+        <th style="color:var(--muted);">Aspect</th>
+        <th style="color:#fca5a5;">Old Law</th>
+        <th style="color:var(--new);">New Law (2023)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="color:var(--muted);">Substantive Criminal Law</td><td class="old-val">IPC 1860 · 511 sections · Colonial origin</td><td class="new-val">BNS 2023 · 358 sections · India-centric drafting</td></tr>
+      <tr><td style="color:var(--muted);">Criminal Procedure</td><td class="old-val">CrPC 1973 · 484 sections</td><td class="new-val">BNSS 2023 · 531 sections · More procedural clarity</td></tr>
+      <tr><td style="color:var(--muted);">Law of Evidence</td><td class="old-val">Indian Evidence Act 1872 · 167 sections</td><td class="new-val">BSA 2023 · 170 sections · Digital era ready</td></tr>
+      <tr><td style="color:var(--muted);">Terrorism Offence</td><td class="old-val">No explicit definition in IPC · UAPA used</td><td class="new-val">Explicitly defined and punishable under BNS</td></tr>
+      <tr><td style="color:var(--muted);">Electronic Evidence</td><td class="old-val">Section 65B certificate (complex)</td><td class="new-val">Section 63 BSA — simplified digital certificate</td></tr>
+      <tr><td style="color:var(--muted);">Zero FIR</td><td class="old-val">Not statutory, only judicial guideline</td><td class="new-val">Statutorily recognised under BNSS</td></tr>
+      <tr><td style="color:var(--muted);">Sedition</td><td class="old-val">Section 124A IPC — still in force</td><td class="new-val">Removed from BNS · Replaced with Sec 152 (acts against India)</td></tr>
+      <tr><td style="color:var(--muted);">Effective Date</td><td class="old-val">Enacted in British era (1860–1973)</td><td class="new-val">Enacted July 2023 · Effective 1 July 2024</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- STUDY FLOW -->
+<div class="divider"><div></div><span>✦</span><div></div></div>
+<div class="flow-wrap">
+  <h3>📚 Recommended Study Sequence for Law Students / Competitive Exams</h3>
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="step-num">01</div>
+      <div class="step-label">Constitution</div>
+      <div class="step-detail">Fundamental Rights · DPSPs · Schedules · Amendments</div>
+    </div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-step">
+      <div class="step-num">02</div>
+      <div class="step-label">BNS + IPC</div>
+      <div class="step-detail">Parallel reading · Old vs New</div>
+    </div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-step">
+      <div class="step-num">03</div>
+      <div class="step-label">BNSS + CrPC</div>
+      <div class="step-detail">Arrest · Bail · Trial · Zero FIR</div>
+    </div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-step">
+      <div class="step-num">04</div>
+      <div class="step-label">BSA + Evidence</div>
+      <div class="step-detail">Digital proof · Confessions · Witnesses</div>
+    </div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-step">
+      <div class="step-num">05</div>
+      <div class="step-label">Civil Laws</div>
+      <div class="step-detail">CPC · Contracts · TPA · Arbitration</div>
+    </div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-step">
+      <div class="step-num">06</div>
+      <div class="step-label">Family Laws</div>
+      <div class="step-detail">Hindu Acts · Muslim Law · Special Marriage</div>
+    </div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-step">
+      <div class="step-num">07</div>
+      <div class="step-label">Corporate & Tax</div>
+      <div class="step-detail">Companies · IBC · SEBI · GST · IT Act</div>
+    </div>
+    <div class="flow-arrow">›</div>
+    <div class="flow-step">
+      <div class="step-num">08</div>
+      <div class="step-label">Special Laws</div>
+      <div class="step-detail">IP · Labour · Environment · Social Justice · Health</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Indian Legal System — Comprehensive Study Reference &nbsp;·&nbsp; 90+ Laws Covered &nbsp;·&nbsp; BNS, BNSS & BSA effective 1 July 2024<br>
+  Constitution as amended up to 2024 &nbsp;·&nbsp; For academic & exam preparation purposes</p>
+</footer>
+
+</div><!-- end page -->
+
+<script>
+function toggleCard(head) {
+  const card = head.closest('.cat-card');
+  card.classList.toggle('collapsed');
+}
+
+function filterCards(cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+
+  const cards = document.querySelectorAll('.cat-card');
+  cards.forEach(card => {
+    if (cat === 'all' || card.dataset.cat === cat) {
+      card.style.display = '';
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(16px)';
+      setTimeout(() => {
+        card.style.transition = 'opacity 0.4s, transform 0.4s';
+        card.style.opacity = '1';
+        card.style.transform = '';
+      }, 10);
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+// Staggered initial animation
+document.querySelectorAll('.cat-card').forEach((card, i) => {
+  card.style.animationDelay = (i * 0.07) + 's';
+});
+</script>
+</body>
+</html>
