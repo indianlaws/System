@@ -218,8 +218,13 @@ header p { font-size: 12px; color: var(--muted); letter-spacing: 0.15em; text-tr
   flex-direction: column;
   gap: 6px;
   max-height: 600px;
-  overflow: hidden;
+  overflow: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
   transition: max-height 0.35s ease, padding 0.35s;
+}
+.cat-body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
 }
 .cat-card.collapsed .cat-body {
   max-height: 0;
@@ -538,7 +543,7 @@ footer {
     </div>
     <div class="cat-body">
       <div class="law">
-        <a href="https://indianlaws.github.io/System/bns.html" target="_blank"; style="text-decoration: none;">
+         <a href="https://indianlaws.github.io/System/bns.html" target="_blank"; style="text-decoration: none;">
         <div class="law-top"><span class="law-name">Bharatiya Nyaya Sanhita (BNS)</span><span class="badge b-new">NEW</span><span class="law-year">2023</span></div>
         <div class="law-sub">Replaced IPC 1860 · 358 Sections · Terrorism, Mob lynching, Community service</div>
         </a>
@@ -624,28 +629,41 @@ footer {
         </a>
         </div>
       <div class="law">
+        <a href="#" style="text-decoration: none;">
         <div class="law-top"><span class="law-name">Limitation Act</span><span class="law-year">1963</span></div>
         <div class="law-sub">Time limits for filing suits, appeals & applications</div>
+      </a>
       </div>
       <div class="law">
+        <a href="#" style="text-decoration: none;">
         <div class="law-top"><span class="law-name">Negotiable Instruments Act</span><span class="law-year">1881</span></div>
         <div class="law-sub">Cheques, promissory notes, bills of exchange · Sec 138 dishonour</div>
+      </a>
       </div>
       <div class="law">
+        <a href="#" style="text-decoration: none;">
         <div class="law-top"><span class="law-name">Arbitration & Conciliation Act</span><span class="law-year">1996</span></div>
         <div class="law-sub">ADR mechanism · Based on UNCITRAL Model Law · 2019 Amendment</div>
+        </a>
       </div>
+
       <div class="law">
+        <a href="#" style="text-decoration: none;">
         <div class="law-top"><span class="law-name">Sale of Goods Act</span><span class="law-year">1930</span></div>
         <div class="law-sub">Contract for sale of movable property · Conditions & warranties</div>
+      </a>
       </div>
       <div class="law">
+        <a href="#" style="text-decoration: none;">
         <div class="law-top"><span class="law-name">Indian Partnership Act</span><span class="law-year">1932</span></div>
         <div class="law-sub">Formation & dissolution of partnerships · Rights of partners</div>
+      </a>
       </div>
       <div class="law">
+        <a href="#" style="text-decoration: none;">
         <div class="law-top"><span class="law-name">Mediation Act</span><span class="badge b-new">NEW</span><span class="law-year">2023</span></div>
         <div class="law-sub">Statutory framework for mediation · Pre-litigation mediation</div>
+     </a>
       </div>
     </div>
   </div>
@@ -662,36 +680,52 @@ footer {
     </div>
     <div class="cat-body">
       <div class="law">
+        <a href="#" style="text-decoration: none;">
         <div class="law-top"><span class="law-name">Fundamental Rights</span><span class="badge b-core">CORE</span></div>
         <div class="law-sub">Art. 12–35 · Part III · Right to Equality, Freedom, Life & Liberty, Religion, Education</div>
+      </a>
       </div>
       <div class="law">
+        <a href="#" style="text-decoration: none;"></a>
         <div class="law-top"><span class="law-name">Directive Principles of State Policy (DPSP)</span></div>
         <div class="law-sub">Art. 36–51 · Part IV · Non-justiciable but binding on State policy</div>
+      </a>
       </div>
       <div class="law">
+        <a href="#" style="text-decoration: none;"></a>
         <div class="law-top"><span class="law-name">Fundamental Duties</span></div>
         <div class="law-sub">Art. 51A · Part IV-A · 11 Duties added by 42nd & 86th Amendments</div>
+      </a>
       </div>
       <div class="law">
+        <a href="#" style="text-decoration: none;"></a>
         <div class="law-top"><span class="law-name">Writ Jurisdiction</span></div>
         <div class="law-sub">Art. 32 (SC) & Art. 226 (HC) · Habeas Corpus, Mandamus, Certiorari, Quo Warranto, Prohibition</div>
+      </a>
       </div>
       <div class="law">
+        <a href="#" style="text-decoration: none;"></a>
         <div class="law-top"><span class="law-name">Emergency Provisions</span></div>
         <div class="law-sub">Art. 352 (National) · Art. 356 (State) · Art. 360 (Financial Emergency)</div>
+      </a>
       </div>
       <div class="law">
+        <a href="#" style="text-decoration: none;"></a>
         <div class="law-top"><span class="law-name">7th Schedule — Three Lists</span></div>
         <div class="law-sub">List I (Union) · List II (State) · List III (Concurrent) · Distribution of legislative powers</div>
+      </a>
       </div>
       <div class="law">
+        <a href="#" style="text-decoration: none;"></a>
         <div class="law-top"><span class="law-name">Representation of People Act</span><span class="law-year">1951</span></div>
         <div class="law-sub">Elections, qualifications, disqualifications of MPs & MLAs</div>
+      </a>
       </div>
       <div class="law">
+        <a href="#" style="text-decoration: none;"></a>
         <div class="law-top"><span class="law-name">Lokpal & Lokayuktas Act</span><span class="law-year">2013</span></div>
         <div class="law-sub">Ombudsman for public officials · Investigation of corruption</div>
+      </a>
       </div>
     </div>
   </div>
